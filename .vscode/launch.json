@@ -5,7 +5,7 @@
    "version": "0.2.0",
    "configurations": [
        {
-           "name": "Docker .NET Core Attach (Preview)",
+           "name": "Docker .NET Core Debugger",
            "type": "docker",
            "request": "attach",
            "preLaunchTask": "compose up",
