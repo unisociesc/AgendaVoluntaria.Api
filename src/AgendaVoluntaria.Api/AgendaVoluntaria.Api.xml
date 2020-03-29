@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AgendaVoluntaria.Api</name>
+    </assembly>
+    <members>
+        <member name="M:AgendaVoluntaria.Api.Controllers.AuthController.Login(AgendaVoluntaria.Api.Views.LoginRequest)">
+            <summary>
+            Autenticar Usuario
+            </summary>
+            <remarks>
+            Metodo para realizar a autenticação do usuario, e receber o token jwt
+            </remarks>
+        </member>
+        <member name="M:AgendaVoluntaria.Api.Controllers.AuthController.Register(AgendaVoluntaria.Api.Views.UserRequest)">
+            <summary>
+            Cadastrar novo Usuario
+            </summary>
+        </member>
+        <member name="M:AgendaVoluntaria.Api.Controllers.Core.CoreCrudController`4.Post(`1)">
+            <summary> 
+            Cadastra uma nova entidade
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:AgendaVoluntaria.Api.Controllers.Core.CoreCrudController`4.GetByIdAsync(System.Guid)">
+            <summary>
+            Lista os parametros de acordo o codigo passado
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgendaVoluntaria.Api.Controllers.Core.CoreCrudController`4.Put(System.Guid,`1)">
+            <summary>
+            Atualiza os dados de acordo com os parametros passados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AgendaVoluntaria.Api.Controllers.Core.CoreCrudController`4.Delete(System.Guid)">
+            <summary>
+            Remove o registro da base de dados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AgendaVoluntaria.Api.Views.Core.BaseResponse.Id">
+            <summary>
+            Código identificador
+            </summary>
+        </member>
+        <member name="P:AgendaVoluntaria.Api.Views.Core.BaseResponse.CreateAt">
+            <summary>
+            Data de criação do registro
+            </summary>
+        </member>
+        <member name="P:AgendaVoluntaria.Api.Views.Core.BaseResponse.UpdateAt">
+            <summary>
+            Data da ultima atualização do registro
+            </summary>
+        </member>
+    </members>
+</doc>

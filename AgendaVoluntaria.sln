@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendaVoluntaria.Api", "src\AgendaVoluntaria.Api\AgendaVoluntaria.Api.csproj", "{9E18DF9C-40DD-4F65-8271-A5814A7BF011}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{439058DA-04A8-4B2A-82EF-FC31356399C9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Nuget.config = Nuget.config
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendaVoluntaria.IntegrationTests", "test\AgendaVoluntaria.IntegrationTests\AgendaVoluntaria.IntegrationTests.csproj", "{252C71B1-5DD4-4285-9EF4-7D94E08D7B17}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendaVoluntaria.Tests", "test\AgendaVoluntaria.Tests\AgendaVoluntaria.Tests.csproj", "{87B192A2-6255-4328-9364-372A5168217A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E18DF9C-40DD-4F65-8271-A5814A7BF011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E18DF9C-40DD-4F65-8271-A5814A7BF011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E18DF9C-40DD-4F65-8271-A5814A7BF011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E18DF9C-40DD-4F65-8271-A5814A7BF011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{252C71B1-5DD4-4285-9EF4-7D94E08D7B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{252C71B1-5DD4-4285-9EF4-7D94E08D7B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{252C71B1-5DD4-4285-9EF4-7D94E08D7B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{252C71B1-5DD4-4285-9EF4-7D94E08D7B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B192A2-6255-4328-9364-372A5168217A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B192A2-6255-4328-9364-372A5168217A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B192A2-6255-4328-9364-372A5168217A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B192A2-6255-4328-9364-372A5168217A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {111BB6A8-DB23-4DF9-BFB1-D75E8C2F54DD}
+	EndGlobalSection
+EndGlobal
