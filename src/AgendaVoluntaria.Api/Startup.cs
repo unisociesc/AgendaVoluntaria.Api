@@ -4,8 +4,8 @@ using AgendaVoluntaria.Api.Repositories;
 using AgendaVoluntaria.Api.Repositories.Interfaces;
 using AgendaVoluntaria.Api.Services;
 using AgendaVoluntaria.Api.Services.Interfaces;
-using AgendaVoluntaria.Api.Utils.Interfaces;
 using AgendaVoluntaria.Api.Utils;
+using AgendaVoluntaria.Api.Utils.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -58,6 +58,15 @@ namespace AgendaVoluntaria.Api
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
             });
 
             services.AddAuthentication(x =>
