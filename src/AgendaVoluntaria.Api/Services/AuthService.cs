@@ -32,7 +32,11 @@ namespace AgendaVoluntaria.Api.Services
         public async Task<LoginResponse> Login(LoginRequest userLogin)
         {
             var users = await _userService.GetByAsync(x => x.Email == userLogin.Email);
-            if (!users.Any()) return null;
+            if (!users.Any())
+            {
+                _notifier.Add("Usuário não encontrado");
+                return null;
+            }
             
             var user = users.FirstOrDefault();
             if (user.Password == SecurityUtils.EncryptPassword(userLogin.Password))

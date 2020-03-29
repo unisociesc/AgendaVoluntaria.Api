@@ -29,20 +29,18 @@ namespace AgendaVoluntaria.Api.Controllers.Core
         /// </summary>
         /// <returns></returns>
         /// 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult<TEntityResponse>> Post(TEntityRequest entityViewModel)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return CustomBadRequest(ModelState);
             var entity = _mapper.Map<TEntity>(entityViewModel);
             await _service.CreateAsync(entity);
             return CustomResponse("Entidade Cadastrada com Sucesso", _mapper.Map<TEntityResponse>(entity));
         }
 
-        [HttpGet] 
+        [HttpGet]
         public async Task<ActionResult<List<TEntityResponse>>> GetAllAsync()
         {
-            if (!ModelState.IsValid) return CustomBadRequest(ModelState);
             var registros = await _service.GetAllAsync();
             var result = _mapper.Map<List<TEntityResponse>>(registros);
             return CustomResponse("Registros encontrados!", result);

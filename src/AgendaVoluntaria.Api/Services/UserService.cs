@@ -5,6 +5,10 @@ using AgendaVoluntaria.Api.Services.Core;
 using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils;
 using AgendaVoluntaria.Api.Utils.Interfaces;
+using AgendaVoluntaria.Api.Views;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
