@@ -37,6 +37,15 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "compose up",
+            "command": "docker-compose",
+            "type": "process",
+            "args": [
+                "up",
+                "--build"
+            ]
         }
     ]
 }

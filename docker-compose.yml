@@ -1,0 +1,17 @@
+version: "3.7"
+
+services: 
+  api:
+    build:
+      context: .
+      dockerfile: ./src/AgendaVoluntaria.Api/dockerfile
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ConnectionStrings__AgendaVoluntariaDatabase
+    ports: 
+      - "5000:443"
+  db: 
+    image: postgres:12.2
+    environment: 
+      - POSTGRES_PASSWORD=AgendaVoluntaria
+      - POSTGRES_USER=AgendaVoluntaria
