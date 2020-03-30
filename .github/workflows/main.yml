@@ -6,7 +6,7 @@ on:
     - master
 
 jobs:
-  build_cyberpet:
+  build_agendavoluntaria:
     runs-on: ubuntu-16.04
     steps:
     - uses: actions/checkout@v1
@@ -15,7 +15,7 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         APP_NAME: ${{ 'agendavoluntaria' }}
       run: |
-        cd ./src/CyberPet.Api
+        cd ./src/AgendaVoluntaria.Api
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
         heroku container:push web -a $APP_NAME --context-path ../../.
         heroku container:release web -a $APP_NAME
