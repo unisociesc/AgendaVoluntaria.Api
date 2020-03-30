@@ -7,6 +7,6 @@ namespace AgendaVoluntaria.Api.Services.Interfaces
     public interface IAuthService
     {
         Task<LoginResponse> Login(LoginRequest user);
-        Task<User> Register(UserRequest userResgister);
+        Task<LoginResponse> Register(UserRequest userResgister);
     }
 }

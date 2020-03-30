@@ -1,4 +1,5 @@
 ﻿using AgendaVoluntaria.Api.Models.Interfaces;
+using MassTransit;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +9,7 @@ namespace AgendaVoluntaria.Api.Models.Core
     {
         protected CoreModel()
         {
-            Id = Guid.NewGuid();
+            Id = NewId.NextGuid();
         }
         [Key]
         public Guid Id { get; set; }

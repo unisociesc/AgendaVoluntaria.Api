@@ -18,6 +18,7 @@ namespace AgendaVoluntaria.Api.Repositories
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == entity.Email);
             if (user == null)
             {
+                user.Role = "volunteers";
                 return await base.CreateAsync(entity);
             }
             _notifier.Add("Já existe um usuario cadastrado com este email");

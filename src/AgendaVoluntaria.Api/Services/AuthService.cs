@@ -49,11 +49,14 @@ namespace AgendaVoluntaria.Api.Services
             return null;
         }
 
-        public async Task<User> Register(UserRequest userResgister)
+        public async Task<LoginResponse> Register(UserRequest userResgister)
         {
             User user = _mapper.Map<User>(userResgister);
             await _userService.CreateAsync(user);
-            return user;
+
+            LoginResponse userToken = _mapper.Map<LoginResponse>(user);
+            userToken.Token = GenerateToken(user);
+            return userToken;
         }
 
         private string GenerateToken(User user)
