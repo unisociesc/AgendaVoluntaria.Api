@@ -1,5 +1,7 @@
 ﻿using AgendaVoluntaria.Api.Models;
 using AgendaVoluntaria.Api.Models.Interfaces;
+using AgendaVoluntaria.Api.Utils;
+using AgendaVoluntaria.Api.Utils.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +12,12 @@ namespace AgendaVoluntaria.Api.Repositories
     public class UserRepositoryTest
     {
         protected UserRepository RepositoryUnderTest { get; }
-        protected AgendaVoluntariaContext AgendaVoluntariaDatabaseMock { get; }
+        protected Context AgendaVoluntariaDatabaseMock { get; }
         private readonly INotifier notifierMock;
         private static Guid testId = new Guid("bfbd39c6-76cb-4f49-8351-09ac4b64cb9c");
         public UserRepositoryTest()
         {
-            AgendaVoluntariaDatabaseMock = SqliteAgendaVoluntariaContextFactory.GetAgendaVoluntariaContext();
+            AgendaVoluntariaDatabaseMock = SqliteContextFactory.GetAgendaVoluntariaContext();
             notifierMock = new Notifier();
             RepositoryUnderTest = new UserRepository(AgendaVoluntariaDatabaseMock, notifierMock);
         }
@@ -42,7 +44,7 @@ namespace AgendaVoluntaria.Api.Repositories
                 // Arrange
 
                 // Act
-                var result = await RepositoryUnderTest.GetOneByIdAsync(testId);
+                var result = await RepositoryUnderTest.GetByIdAsync(testId);
 
                 // Assert
                 Assert.Equal("ghmeyer0@gmail.com", result.Email);
@@ -55,7 +57,7 @@ namespace AgendaVoluntaria.Api.Repositories
                 var id = Guid.NewGuid();
 
                 // Act 
-                var result = await RepositoryUnderTest.GetOneByIdAsync(id);
+                var result = await RepositoryUnderTest.GetByIdAsync(id);
 
                 // Assert
                 Assert.Null(result);

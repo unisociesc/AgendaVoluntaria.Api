@@ -31,7 +31,7 @@ namespace AgendaVoluntaria.IntegrationTests
 
         protected virtual void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AgendaVoluntariaContext>(options =>
+            services.AddDbContext<Context>(options =>
                options.UseSqlite("Data Source=cyber.db")
             );
         }

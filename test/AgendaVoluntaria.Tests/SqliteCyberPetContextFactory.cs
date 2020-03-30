@@ -4,14 +4,14 @@ using System;
 
 namespace AgendaVoluntaria.Api
 {
-    public static class SqliteAgendaVoluntariaContextFactory
+    public static class SqliteContextFactory
     {
-        public static AgendaVoluntariaContext GetAgendaVoluntariaContext()
+        public static Context GetAgendaVoluntariaContext()
         {
-            var options = new DbContextOptionsBuilder<AgendaVoluntariaContext>()
+            var options = new DbContextOptionsBuilder<Context>()
                          .UseSqlite("Data Source=" + Guid.NewGuid() + ".db")
                          .Options;
-            var context = new AgendaVoluntariaContext(options);
+            var context = new Context(options);
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             return context;

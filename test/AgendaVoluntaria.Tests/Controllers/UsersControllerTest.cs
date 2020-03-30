@@ -1,6 +1,10 @@
-﻿using AgendaVoluntaria.Api.Models;
+﻿using AgendaVoluntaria.Api.Configuration;
+using AgendaVoluntaria.Api.Models;
 using AgendaVoluntaria.Api.Models.Interfaces;
 using AgendaVoluntaria.Api.Services.Interfaces;
+using AgendaVoluntaria.Api.Utils;
+using AgendaVoluntaria.Api.Utils.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -13,13 +17,15 @@ namespace AgendaVoluntaria.Api.Controllers
     {
         protected UsersController ControllerUnderTest { get; }
         private readonly INotifier notifierMock;
+        private readonly IMapper _mapper;
         protected Mock<IUserService> UserServiceMock { get; }
 
         public UsersControllerTest()
         {
             UserServiceMock = new Mock<IUserService>();
             notifierMock = new Notifier();
-            ControllerUnderTest = new UsersController(UserServiceMock.Object, notifierMock);
+            _mapper = new Mapper(typeof(AutoMapperConfiguration));
+            ControllerUnderTest = new UsersController(UserServiceMock.Object, _mapper, notifierMock);
         }
 
 
@@ -62,11 +68,11 @@ namespace AgendaVoluntaria.Api.Controllers
                     Password = "aaaaa"
                 };
                 UserServiceMock
-                    .Setup(x => x.GetOneByIdAsync(id))
+                    .Setup(x => x.GetByIdAsync(id))
                     .ReturnsAsync(expectedUser);
 
                 // Act
-                var result = await ControllerUnderTest.GetOneByIdAsync(id);
+                var result = await ControllerUnderTest.GetByIdAsync(id);
 
                 // Assert
                 var okResult = Assert.IsType<OkObjectResult>(result);
@@ -81,11 +87,11 @@ namespace AgendaVoluntaria.Api.Controllers
                 Guid id = Guid.NewGuid();
                 User expectedValue = null;
                 UserServiceMock
-                    .Setup(x => x.GetOneByIdAsync(id))
+                    .Setup(x => x.GetByIdAsync(id))
                     .ReturnsAsync(expectedValue);
 
                 // Act
-                var result = await ControllerUnderTest.GetOneByIdAsync(id);
+                var result = await ControllerUnderTest.GetByIdAsync(id);
 
                 // Assert
                 var okResult = Assert.IsType<OkObjectResult>(result);
