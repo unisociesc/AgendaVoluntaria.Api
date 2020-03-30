@@ -1,4 +1,5 @@
 ﻿using AgendaVoluntaria.Api.Utils.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
@@ -8,6 +9,7 @@ namespace AgendaVoluntaria.Api.Controllers.Core
 {
     [ApiController]
     [Produces("application/json")]
+    [Authorize]
     [Route("api/[controller]")]
     public class CoreController : ControllerBase
     {

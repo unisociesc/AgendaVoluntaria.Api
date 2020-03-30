@@ -37,6 +37,7 @@ namespace AgendaVoluntaria.Api.Controllers
         /// <summary>
         /// Cadastrar novo Usuario
         /// </summary>
+        [AllowAnonymous]
         [HttpPost("register")]
         [ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

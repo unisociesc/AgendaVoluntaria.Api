@@ -61,7 +61,7 @@ namespace AgendaVoluntaria.Api.Services
             var tokenHandler = new JwtSecurityTokenHandler();
 
 
-            byte[] secret = Encoding.ASCII.GetBytes(_configuration.GetSection("SecuritSettings:Secret").Value);
+            byte[] secret = Encoding.UTF8.GetBytes(_configuration.GetSection("SecuritSettings:Secret").Value);
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(new Claim[]
