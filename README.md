@@ -1,5 +1,7 @@
 # Agenda voluntária
 
+![.NET Core](https://github.com/unisociesc/AgendaVoluntaria.Api/workflows/.NET%20Core/badge.svg)
+
 # Introduction 
 
 Api para aplicativo de controle de agenda de estagiarios durante plantão de atendimento do covid-19
