@@ -36,7 +36,18 @@ namespace AgendaVoluntaria.Api
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IShiftService, ShiftService>();
+            services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IVolunteerService, VolunteerService>();
+            services.AddScoped<IVolunteerShiftService, VolunteerShiftService>();
+            services.AddScoped<IPsicoService, PsicoService>();
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IShiftRepository, ShiftRepository>();
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IVolunteerRepository, VolunteerRepository>();
+            services.AddScoped<IPsicoRepository, PsicoRepository>();
+            services.AddScoped<IVolunteerShiftRepository, VolunteerShiftRepository>();
 
             services.AddScoped<INotifier, Notifier>();
 
@@ -54,7 +65,7 @@ namespace AgendaVoluntaria.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cyber-Pet API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Agenda Voluntária API", Version = "v1" });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
@@ -93,6 +104,7 @@ namespace AgendaVoluntaria.Api
         {
             UpdateDatabase(app);
             app.UseDeveloperExceptionPage();
+
             app.UseCors(x => x
                .AllowAnyOrigin()
                .AllowAnyMethod()
@@ -100,7 +112,7 @@ namespace AgendaVoluntaria.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cyber-Pet V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Agenda Voluntária V1");
             });
             app.UseHttpsRedirection();
 
