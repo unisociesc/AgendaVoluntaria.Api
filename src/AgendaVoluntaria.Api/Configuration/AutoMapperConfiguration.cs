@@ -11,6 +11,10 @@ namespace AgendaVoluntaria.Api.Configuration
             CreateMap<UserRequest, User>();
             CreateMap<User, UserResponse>();
             CreateMap<User, LoginResponse>();
+
+            CreateMap<ShiftRequest, Shift>();
+            CreateMap<Shift, ShiftResponse>();
+
         }
     }
 }
