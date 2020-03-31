@@ -23,9 +23,10 @@ namespace AgendaVoluntaria.Api.Controllers
 
         public override async Task<ActionResult<List<ShiftResponse>>> GetAllAsync()
         {
-            var response = _mapper.Map<ShiftResponse>(await _service.GetAllWithTotalVolunteersAsync());
 
-            return CustomResponse("Registros Encontrados", response);
+            IList<ShiftResponse> shiftResponse = _mapper.Map<IList<ShiftResponse>>(await _service.GetAllWithTotalVolunteersAsync());
+
+            return CustomResponse("Registros Encontrados", shiftResponse);
         }
     }
 }

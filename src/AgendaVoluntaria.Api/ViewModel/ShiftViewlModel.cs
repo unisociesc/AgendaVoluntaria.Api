@@ -10,6 +10,6 @@ namespace AgendaVoluntaria.Api.ViewModel
         public DateTime Begin { get; set; }
         public DateTime End { get; set; }
         public int MaxVolunteer { get; set; }
-        public int TotalVonteer { get; set; }
+        public int TotalVolunteer { get; set; }
     }
 }

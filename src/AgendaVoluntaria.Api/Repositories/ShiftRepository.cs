@@ -21,18 +21,27 @@ namespace AgendaVoluntaria.Api.Repositories
 
         public async Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync()
         {
-            return await _context.Shifts
-                .Join(_context.VolunteerShifts, Shifts => Shifts.Id, VolunteerShift => VolunteerShift.IdShift, (Shifts, VolunteerShift) => new { Shifts, VolunteerShift })
-                .GroupBy(x => new { x.Shifts.Id })
+            var shifts = await _context.Shifts
                 .Select(x => new ShiftViewlModel
                 {
-                    Id = x.Key.Id,
-                    Begin = x.Max(x => x.Shifts.Begin),
-                    End = x.Max(x => x.Shifts.End),
-                    MaxVolunteer = x.Max(x => x.Shifts.MaxVolunteer),
-                    TotalVonteer = x.Count()
+                    Id = x.Id,
+                    Begin = x.Begin,
+                    End = x.End,
+                    MaxVolunteer = x.MaxVolunteer,
+                    CreateAt = x.CreateAt,
+                    UpdateAt = x.UpdateAt
                 })
                 .ToListAsync();
+
+            var volunteerShiftsList = await _context.VolunteerShifts.ToListAsync();
+            foreach (var shift in shifts)
+            {
+                shift.TotalVolunteer = volunteerShiftsList.Where(x => x.IdShift == shift.Id).Count();
+            }
+
+                
+
+            return shifts;
 
             
         }
