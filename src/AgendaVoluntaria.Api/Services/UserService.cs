@@ -17,10 +17,18 @@ namespace AgendaVoluntaria.Api.Services
     {
         public UserService(INotifier notifier, IUserRepository userRepository) : base(notifier, userRepository) { }
 
-        public override Task<int> CreateAsync(User user)
+        public override async Task<int> CreateAsync(User newUser)
         {
-            user.Password = SecurityUtils.EncryptPassword(user.Password);
-            return base.CreateAsync(user);
+            newUser.Password = SecurityUtils.EncryptPassword(newUser.Password);
+
+            var user = _repository.GetByAsync(x => x.Email == newUser.Email);
+            if (user == null)
+            {
+                if(string.IsNullOrWhiteSpace(newUser.Role)) newUser.Role = "volunteers";
+                return await base.CreateAsync(newUser);
+            }
+            _notifier.Add("Já existe um usuario cadastrado com este email");
+            return -1;
         }
 
     }

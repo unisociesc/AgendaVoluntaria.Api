@@ -13,11 +13,7 @@ namespace AgendaVoluntaria.Api.Repositories
 {
     public class ShiftRepository : CoreRepository<Shift>,IShiftRepository
     {   
-        private readonly IUserShiftRepository _volunteerShiftRepository;
-        public ShiftRepository(Context context, INotifier notifier, IUserShiftRepository volunteerShiftRepository) : base( context, notifier)
-        {
-            _volunteerShiftRepository = volunteerShiftRepository;
-        }
+        public ShiftRepository(Context context, INotifier notifier) : base( context, notifier) { }
 
         public async Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync()
         {
@@ -38,12 +34,7 @@ namespace AgendaVoluntaria.Api.Repositories
             {
                 shift.TotalVolunteer = volunteerShiftsList.Where(x => x.IdShift == shift.Id).Count();
             }
-
-                
-
-            return shifts;
-
-            
+            return shifts;            
         }
     }
 }
