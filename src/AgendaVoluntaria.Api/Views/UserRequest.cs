@@ -22,5 +22,8 @@ namespace AgendaVoluntaria.Api.Views
         
         [Required(AllowEmptyStrings = false, ErrorMessage = "Informar Telefone")]
         public string Phone { get; set; }
+
+        [Required]
+        public string Roles { get; set; }
     }
 }
