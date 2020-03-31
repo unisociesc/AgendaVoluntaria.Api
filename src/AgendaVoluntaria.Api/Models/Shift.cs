@@ -1,6 +1,6 @@
+using AgendaVoluntaria.Api.Models.Core;
 using System;
 using System.ComponentModel.DataAnnotations;
-using AgendaVoluntaria.Api.Models.Core;
 
 namespace AgendaVoluntaria.Api.Models
 {
@@ -15,6 +15,5 @@ namespace AgendaVoluntaria.Api.Models
         [Required]
         public int MaxVolunteer { get; set; }
 
-        public ShiftsDescription Name { get; set; }
     }
 }
