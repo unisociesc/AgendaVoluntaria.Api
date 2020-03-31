@@ -9,7 +9,7 @@ namespace AgendaVoluntaria.Api.Views
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public int CPF { get; set; }
+        public string CPF { get; set; }
         public string Phone { get; set; }
         public string Role { get; set; }
     }
