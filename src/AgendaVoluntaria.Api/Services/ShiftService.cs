@@ -19,9 +19,9 @@ namespace AgendaVoluntaria.Api.Services
             return _repository.GetAllWithTotalVolunteersAsync();
         }
 
-        public override Task<Shift> GetByIdAsync(Guid id)
+        public int GetVolunteersCountById(Guid idShift)
         {
-            return base.GetByIdAsync(id);
+            throw new NotImplementedException();
         }
     }
 }

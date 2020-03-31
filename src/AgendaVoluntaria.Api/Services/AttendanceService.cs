@@ -13,16 +13,19 @@ namespace AgendaVoluntaria.Api.Services
     {
         public AttendanceService(INotifier notifier, IAttendanceRepository repository ) : base(notifier, repository) { }
 
-        public override Task<int> CreateAsync(Attendance entity)
+        public async Task<int> SaveCheckIn(Attendance attendance)
         {
-            entity.Begin = DateTime.Now;
 
-            return base.CreateAsync(entity);
-        }
+            // TODO: Pegar horario de
+            var beginTime = DateTime.Now;
 
-        public override Task<int> UpdateAsync(Attendance entity)
-        {
-            return base.UpdateAsync(entity);
+            if (DateTime.Now < beginTime.AddMinutes(-15) || DateTime.Now > beginTime.AddMinutes(15))
+            {
+                _notifier.Add("Não é possivel fazer o check-in com mais de 15 min de diferença");
+                return -1;
+            }
+
+            return await base.CreateAsync(attendance);
         }
     }
 }

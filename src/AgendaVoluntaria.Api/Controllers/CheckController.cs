@@ -28,9 +28,9 @@ namespace AgendaVoluntaria.Api.Controllers
         public async Task<IActionResult> In(CheckRequest request)
         {
             Attendance attendance = this.mapper.Map<Attendance>(request);
-            attendance.IdUser = Guid.Parse(HttpContext.User.Identities.First().Claims.FirstOrDefault(x => x.Type == "IdUser").Value);
+            attendance.IdUser = Guid.Parse(GetClaim("IdUser"));
             await _attendanceService.CreateAsync(attendance);
-            return CustomResponse("Check-In registrado!", attendance);
+            return CustomResponse("Check-In registrado!");
         }
 
         
@@ -38,7 +38,10 @@ namespace AgendaVoluntaria.Api.Controllers
         [Route("out")]
         public async Task<IActionResult> Out(CheckRequest request)
         {
-            return CustomResponse("Check-In registrado!", null);
+            Attendance attendance = this.mapper.Map<Attendance>(request);
+            attendance.IdUser = Guid.Parse(GetClaim("IdUser"));
+            await _attendanceService.UpdateAsync(attendance);
+            return CustomResponse("Check-Out registrado!");
         }
 
 

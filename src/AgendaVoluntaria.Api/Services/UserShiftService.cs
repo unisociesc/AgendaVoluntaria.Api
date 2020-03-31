@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgendaVoluntaria.Api.Models;
@@ -9,43 +11,48 @@ using AgendaVoluntaria.Api.Utils.Interfaces;
 namespace AgendaVoluntaria.Api.Services
 {
 
-    public class UserShiftService : CoreCrudService<UserShift, IVolunteerShiftRepository>, IVolunteerShiftService
+    public class UserShiftService : CoreCrudService<UserShift, IUserShiftRepository>, IUserShiftService
     {
-        private readonly IShiftRepository _shiftRepository;
-        private readonly IVolunteerRepository _volunteerRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IShiftService _shiftService;
+        private readonly IVolunteerService _volunteerService;
+        private readonly IUserService _userService;
 
-        public UserShiftService(INotifier notifier, IVolunteerShiftRepository repository, IShiftRepository shiftRepository, IVolunteerRepository volunteerRepository, IUserRepository userRepository) : base(notifier, repository)
+        public UserShiftService(INotifier notifier,
+                                IShiftService shiftService,
+                                IVolunteerService volunteerService,
+                                IUserService userService,
+                                IUserShiftRepository repository) : base(notifier, repository)
         {
-            _shiftRepository = shiftRepository;
-            _volunteerRepository = volunteerRepository;
-            _userRepository = userRepository;
+            _shiftService = shiftService;
+            _volunteerService = volunteerService;
+            _userService = userService;
         }
 
         public override async Task<int> CreateAsync(UserShift volunteerShift)
         {
-            User user = await _userRepository.GetByIdAsync(volunteerShift.IdUser);
+            User user = await _userService.GetByIdAsync(volunteerShift.IdUser);
 
             if (user == null)
                 return -1;
 
-            Shift shift = await _shiftRepository.GetByIdAsync(volunteerShift.IdShift);
+            Shift shift = await _shiftService.GetByIdAsync(volunteerShift.IdShift);
 
             if (shift == null)
                 return -1; 
 
-            var volunteerShifts = await _volunteerRepository.GetShiftsByVolunteerId(volunteerShift.IdUser);
+            // TODO:  Corrigir
+            //var volunteerShifts = await _volunteerService.GetShiftsByVolunteerId(volunteerShift.IdUser);
 
-            var volunteerShiftsQuerable = volunteerShifts
-                .Where(x => x.Begin.AddHours(24) < shift.Begin && x.Begin.AddHours(-24) > shift.Begin);
+            //var volunteerShiftsQuerable = volunteerShifts
+            //    .Where(x => x.Begin.AddHours(24) < shift.Begin && x.Begin.AddHours(-24) > shift.Begin);
 
-            if (volunteerShiftsQuerable.Any())
-            {
-                _notifier.Add("Existe outro turno já atribuido ao voluntario, com intervalo menor de 24 horas");
-                return -1;
-            }
+            //if (volunteerShiftsQuerable.Any())
+            //{
+            //    _notifier.Add("Existe outro turno já atribuido ao voluntario, com intervalo menor de 24 horas");
+            //    return -1;
+            //}
 
-            int volunteers = _shiftRepository.GetVolunteersCountById(volunteerShift.IdShift);
+            int volunteers = _shiftService.GetVolunteersCountById(volunteerShift.IdShift);
 
             if (volunteers >= shift.MaxVolunteer)
             {
@@ -54,6 +61,11 @@ namespace AgendaVoluntaria.Api.Services
             }
 
             return await base.CreateAsync(volunteerShift);
+        }
+
+        public async Task<List<UserShift>> GetUserShiftsByUser(Guid idUser)
+        {
+            return await _repository.GetUserShiftsByUser(idUser);
         }
     }
 }

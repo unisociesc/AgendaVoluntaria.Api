@@ -68,7 +68,7 @@ namespace AgendaVoluntaria.Api.Repositories.Core
             return entity;
         }
 
-        public async Task<int> UpdateAsync(TEntity entity)
+        public virtual async Task<int> UpdateAsync(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
             return await _context.SaveChangesAsync();

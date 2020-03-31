@@ -8,7 +8,6 @@ namespace AgendaVoluntaria.Api.Repositories.Interfaces
 {
     public interface IShiftRepository : ICoreRepository<Shift>
     {
-        int GetVolunteersCountById(Guid id);
         Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync();
     }
 }

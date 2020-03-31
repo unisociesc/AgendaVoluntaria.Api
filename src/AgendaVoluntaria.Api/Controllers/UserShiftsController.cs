@@ -7,8 +7,8 @@ using AutoMapper;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
-    public class UserShiftsController : CoreCrudController<IVolunteerShiftService,UserShiftRequest,UserShiftResponse,UserShift>
+    public class UserShiftsController : CoreCrudController<IUserShiftService,UserShiftRequest,UserShiftResponse,UserShift>
     {
-        public UserShiftsController(INotifier notifier, IMapper mapper, IVolunteerShiftService service) : base(notifier, mapper, service) {}
+        public UserShiftsController(INotifier notifier, IMapper mapper, IUserShiftService service) : base(notifier, mapper, service) {}
     }
 }

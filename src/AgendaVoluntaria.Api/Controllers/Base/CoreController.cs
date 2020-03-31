@@ -73,5 +73,10 @@ namespace AgendaVoluntaria.Api.Controllers.Core
             return CustomBadRequest();
         }
 
+        protected string GetClaim(string type)
+        {
+            return HttpContext.User.Identities.First().Claims.FirstOrDefault(x => x.Type == type).Value;
+        }
+
     }
 }

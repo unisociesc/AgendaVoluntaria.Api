@@ -13,8 +13,8 @@ namespace AgendaVoluntaria.Api.Repositories
 {
     public class ShiftRepository : CoreRepository<Shift>,IShiftRepository
     {   
-        private readonly IVolunteerShiftRepository _volunteerShiftRepository;
-        public ShiftRepository(Context context, INotifier notifier, IVolunteerShiftRepository volunteerShiftRepository) : base( context, notifier)
+        private readonly IUserShiftRepository _volunteerShiftRepository;
+        public ShiftRepository(Context context, INotifier notifier, IUserShiftRepository volunteerShiftRepository) : base( context, notifier)
         {
             _volunteerShiftRepository = volunteerShiftRepository;
         }
@@ -44,16 +44,6 @@ namespace AgendaVoluntaria.Api.Repositories
             return shifts;
 
             
-        }
-
-        public override Task<Shift> GetByIdAsync(Guid id)
-        {
-            return base.GetByIdAsync(id);
-        }
-
-        public int GetVolunteersCountById(Guid id)
-        {
-            return _volunteerShiftRepository.GetVolunteersCount(id);
         }
     }
 }
