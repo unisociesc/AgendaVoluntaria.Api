@@ -7,7 +7,7 @@ namespace AgendaVoluntaria.Api.Models
 {
     public class VolunteerShift : CoreModel
     {
-        public Guid Idvolunteer { get; set; }
+        public Guid IdVolunteer { get; set; }
 
         [Required]
         [ForeignKey("IdVolunteer")]
