@@ -68,7 +68,10 @@ namespace AgendaVoluntaria.Api.Controllers.Core
             if (!ModelState.IsValid) return CustomBadRequest(ModelState);
             var entity = _mapper.Map<TEntity>(request);
             entity.Id = id;
-            return CustomResponse("Registro Atualizado com Sucesso!", await _service.UpdateAsync(entity));
+
+            await _service.UpdateAsync(entity);
+
+            return CustomResponse("Registro Atualizado com Sucesso!");
         }
 
         /// <summary>
