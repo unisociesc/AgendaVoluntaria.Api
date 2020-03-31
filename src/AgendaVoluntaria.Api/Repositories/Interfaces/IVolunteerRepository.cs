@@ -7,6 +7,6 @@ namespace AgendaVoluntaria.Api.Repositories.Interfaces
 {
     public interface IVolunteerRepository : ICoreRepository<Volunteer>
     {
-        Task<IList<Shift>> GetShiftsByVolunteerId(Guid volunteerId)
+        Task<IList<Shift>> GetShiftsByVolunteerId(Guid volunteerId);
     }
 }
