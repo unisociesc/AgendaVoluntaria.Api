@@ -16,7 +16,6 @@ namespace AgendaVoluntaria.Api.Services
         public override Task<int> CreateAsync(Attendance entity)
         {
             entity.Begin = DateTime.Now;
-
             return base.CreateAsync(entity);
         }
 
