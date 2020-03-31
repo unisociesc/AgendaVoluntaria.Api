@@ -12,41 +12,38 @@ namespace AgendaVoluntaria.Api.Services
     public class VolunteerShiftService : CoreCrudService<VolunteerShift, IVolunteerShiftRepository>, IVolunteerShiftService
     {
         private readonly IShiftRepository _shiftRepository;
-        public VolunteerShiftService(INotifier notifier, IVolunteerShiftRepository repository, IShiftRepository shiftRepository) : base(notifier, repository)
+        private readonly IVolunteerRepository _volunteerRepository;
+
+        public VolunteerShiftService(INotifier notifier, IVolunteerShiftRepository repository, IShiftRepository shiftRepository, IVolunteerRepository volunteerRepository) : base(notifier, repository)
         {
             _shiftRepository = shiftRepository;
+            _volunteerRepository = volunteerRepository;
         }
 
         public override async Task<int> CreateAsync(VolunteerShift volunteerShift)
         {
             Shift shift = await _shiftRepository.GetByIdAsync(volunteerShift.IdShift);
-            
-            var volunteerShifts = await base.GetByAsync(x => x.IdVolunteer == volunteerShift.IdVolunteer);
-            
-            volunteersShifts.Where(x => x.Begin)
 
-            foreach (var item in volunteerShifts)
+            var volunteerShifts = await _volunteerRepository.GetShiftsByVolunteerId(volunteerShift.IdVolunteer);
+
+            var volunteerShiftsQuerable = volunteerShifts
+                .Where(x => x.Begin.AddHours(24) < shift.Begin && x.Begin.AddHours(-24) > shift.Begin);
+
+            if (volunteerShiftsQuerable.Any())
             {
-                Shift x = await _shiftRepository.GetByIdAsync(item.IdShift);
-
-                if (x.Begin.AddHours(24) < shift.Begin && x.Begin.AddHours(-24) > shift.Begin)
-                {
-                    
-                }
+                _notifier.Add("Existe outro turno já atribuido ao voluntario, com intervalo menor de 24 horas");
+                return -1;
             }
-
-            volunteerShifts.Where(x => x.)
 
             int volunteers = _shiftRepository.GetVolunteersCountById(volunteerShift.IdShift);
-            
-            if (shift.MaxVolunteer < volunteers)
+
+            if (shift.MaxVolunteer >= volunteers)
             {
-                return await base.CreateAsync(volunteerShift);
+                _notifier.Add("Limite de voluntários excedido para este turno");
+                return -1;
             }
 
-            _notifier.Add("Limite de voluntários excedido para este turno");
-
-            return -1;
+            return await base.CreateAsync(volunteerShift);
         }
     }
 }
