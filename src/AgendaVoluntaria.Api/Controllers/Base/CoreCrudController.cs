@@ -30,7 +30,7 @@ namespace AgendaVoluntaria.Api.Controllers.Core
         /// <returns></returns>
         /// 
         [HttpPost]
-        public async Task<ActionResult<TEntityResponse>> Post(TEntityRequest entityViewModel)
+        public virtual async Task<ActionResult<TEntityResponse>> Post(TEntityRequest entityViewModel)
         {
             if (!ModelState.IsValid) return CustomBadRequest(ModelState);
             var entity = _mapper.Map<TEntity>(entityViewModel);
@@ -39,7 +39,7 @@ namespace AgendaVoluntaria.Api.Controllers.Core
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TEntityResponse>>> GetAllAsync()
+        public virtual async Task<ActionResult<List<TEntityResponse>>> GetAllAsync()
         {
             var registros = await _service.GetAllAsync();
             var result = _mapper.Map<List<TEntityResponse>>(registros);
@@ -51,7 +51,7 @@ namespace AgendaVoluntaria.Api.Controllers.Core
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<TEntityResponse>> GetByIdAsync(Guid id)
+        public virtual async Task<ActionResult<TEntityResponse>> GetByIdAsync(Guid id)
         {
             if (!ModelState.IsValid) return CustomBadRequest(ModelState);
             var resultado = await _service.GetByIdAsync(id);
@@ -63,7 +63,7 @@ namespace AgendaVoluntaria.Api.Controllers.Core
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<TEntityResponse>> Put([FromRoute]Guid id, [FromBody]TEntityRequest request)
+        public virtual async Task<ActionResult<TEntityResponse>> Put([FromRoute]Guid id, [FromBody]TEntityRequest request)
         {
             if (!ModelState.IsValid) return CustomBadRequest(ModelState);
             var entity = _mapper.Map<TEntity>(request);
@@ -76,7 +76,7 @@ namespace AgendaVoluntaria.Api.Controllers.Core
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id:guid}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public virtual async Task<ActionResult> Delete(Guid id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             await _service.DeleteAsync(id);
