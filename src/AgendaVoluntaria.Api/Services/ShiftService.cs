@@ -13,7 +13,12 @@ namespace AgendaVoluntaria.Api.Services
     public class ShiftService : CoreCrudService<Shift, IShiftRepository>,IShiftService
     {
         public ShiftService(INotifier notifier, IShiftRepository repository) : base(notifier, repository) { }
-        
+
+        public async Task<IList<ShiftViewlModel>> GetAllByNextDays(int days)
+        {
+            return await _repository.GetAllByNextDays(days);
+        }
+
         public Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync()
         {
             return _repository.GetAllWithTotalVolunteersAsync();

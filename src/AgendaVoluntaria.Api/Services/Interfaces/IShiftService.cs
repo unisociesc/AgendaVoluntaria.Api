@@ -9,6 +9,8 @@ namespace AgendaVoluntaria.Api.Services.Interfaces
     public interface IShiftService : ICoreCrudService<Shift>
     {
         Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync();
+
+        Task<IList<ShiftViewlModel>> GetAllByNextDays(int days);
         int GetVolunteersCountById(Guid idShift);
     }
 }

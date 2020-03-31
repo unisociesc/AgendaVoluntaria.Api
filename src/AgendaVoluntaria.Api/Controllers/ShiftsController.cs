@@ -28,5 +28,14 @@ namespace AgendaVoluntaria.Api.Controllers
 
             return CustomResponse("Registros Encontrados", shiftResponse);
         }
+
+        /// <summary> 
+        /// Obtem os turnos dos proximos X dias
+        /// </summary>
+        [HttpGet("{days:int}")]
+        public async Task<ActionResult<List<ShiftResponse>>> GetAllByNextDays([FromRoute] int days = 15)
+        {
+            return CustomResponse("Registros Encontrados", _mapper.Map<IList<ShiftResponse>>(await _service.GetAllByNextDays(days)));
+        }
     }
 }
