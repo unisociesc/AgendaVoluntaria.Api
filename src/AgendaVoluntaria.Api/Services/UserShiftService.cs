@@ -9,22 +9,22 @@ using AgendaVoluntaria.Api.Utils.Interfaces;
 namespace AgendaVoluntaria.Api.Services
 {
 
-    public class VolunteerShiftService : CoreCrudService<VolunteerShift, IVolunteerShiftRepository>, IVolunteerShiftService
+    public class UserShiftService : CoreCrudService<UserShift, IVolunteerShiftRepository>, IVolunteerShiftService
     {
         private readonly IShiftRepository _shiftRepository;
         private readonly IVolunteerRepository _volunteerRepository;
 
-        public VolunteerShiftService(INotifier notifier, IVolunteerShiftRepository repository, IShiftRepository shiftRepository, IVolunteerRepository volunteerRepository) : base(notifier, repository)
+        public UserShiftService(INotifier notifier, IVolunteerShiftRepository repository, IShiftRepository shiftRepository, IVolunteerRepository volunteerRepository) : base(notifier, repository)
         {
             _shiftRepository = shiftRepository;
             _volunteerRepository = volunteerRepository;
         }
 
-        public override async Task<int> CreateAsync(VolunteerShift volunteerShift)
+        public override async Task<int> CreateAsync(UserShift volunteerShift)
         {
             Shift shift = await _shiftRepository.GetByIdAsync(volunteerShift.IdShift);
 
-            var volunteerShifts = await _volunteerRepository.GetShiftsByVolunteerId(volunteerShift.IdVolunteer);
+            var volunteerShifts = await _volunteerRepository.GetShiftsByVolunteerId(volunteerShift.IdUser);
 
             var volunteerShiftsQuerable = volunteerShifts
                 .Where(x => x.Begin.AddHours(24) < shift.Begin && x.Begin.AddHours(-24) > shift.Begin);

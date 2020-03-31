@@ -40,7 +40,7 @@ namespace AgendaVoluntaria.Api
             services.AddScoped<IShiftService, ShiftService>();
             services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddScoped<IVolunteerService, VolunteerService>();
-            services.AddScoped<IVolunteerShiftService, VolunteerShiftService>();
+            services.AddScoped<IVolunteerShiftService, UserShiftService>();
             services.AddScoped<IPsicoService, PsicoService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
@@ -48,7 +48,7 @@ namespace AgendaVoluntaria.Api
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IVolunteerRepository, VolunteerRepository>();
             services.AddScoped<IPsicoRepository, PsicoRepository>();
-            services.AddScoped<IVolunteerShiftRepository, VolunteerShiftRepository>();
+            services.AddScoped<IVolunteerShiftRepository, UserShiftRepository>();
 
             services.AddScoped<INotifier, Notifier>();
 

@@ -16,9 +16,9 @@ namespace AgendaVoluntaria.Api.Repositories
 
         public async Task<IList<Shift>> GetShiftsByVolunteerId(Guid volunteerId)
         {
-            return await _context.VolunteerShifts
+            return await _context.UserShifts
                 .Join(_context.Shifts, volunteerShift => volunteerShift.IdShift, shift => shift.Id, (volunteerShift, shift) => new { VolunteerShift = volunteerShift, Shift = shift })
-                .Where(x => x.VolunteerShift.IdVolunteer == volunteerId)
+                .Where(x => x.VolunteerShift.IdUser == volunteerId)
                 .Select(x => x.Shift)
                 .ToListAsync();
         }

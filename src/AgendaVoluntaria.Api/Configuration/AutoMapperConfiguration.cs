@@ -27,8 +27,8 @@ namespace AgendaVoluntaria.Api.Configuration
             CreateMap<VolunteerRequest, Volunteer>();
             CreateMap<Volunteer, VolunteerResponse>();
 
-            CreateMap<VolunteerRequest, VolunteerShift>();
-            CreateMap<VolunteerShift, VolunteerResponse>();
+            CreateMap<VolunteerRequest, UserShift>();
+            CreateMap<UserShift, VolunteerResponse>();
 
             CreateMap<ShiftViewlModel, ShiftResponse>();
 

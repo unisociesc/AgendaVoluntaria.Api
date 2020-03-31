@@ -33,7 +33,7 @@ namespace AgendaVoluntaria.Api.Repositories
                 })
                 .ToListAsync();
 
-            var volunteerShiftsList = await _context.VolunteerShifts.ToListAsync();
+            var volunteerShiftsList = await _context.UserShifts.ToListAsync();
             foreach (var shift in shifts)
             {
                 shift.TotalVolunteer = volunteerShiftsList.Where(x => x.IdShift == shift.Id).Count();

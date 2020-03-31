@@ -4,7 +4,7 @@ using AgendaVoluntaria.Api.Views.Core;
 
 namespace AgendaVoluntaria.Api.Views
 {
-    public class VolunteerShiftResponse : BaseResponse
+    public class UserShiftResponse : BaseResponse
     {
         public Guid IdVolunteer { get; set; }
 

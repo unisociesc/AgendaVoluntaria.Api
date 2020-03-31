@@ -18,6 +18,10 @@ namespace AgendaVoluntaria.Api.Models
         [StringLength(128, MinimumLength = 6)]
         public string Password { get; set; }
 
+        public int CPF { get; set; }
+
+        public string Phone { get; set; }
+
         [Required]
         public string Role { get; set; }
     }

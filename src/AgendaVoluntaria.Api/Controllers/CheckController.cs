@@ -21,9 +21,9 @@ namespace AgendaVoluntaria.Api.Controllers
 
         [Route("in")]
         [HttpPost]
-        public async Task<IActionResult> In ()
+        public async Task<IActionResult> In()
         {
-            var a = HttpContext.User.Identities.First().Claims.ToList();
+            HttpContext.User.Identities.First().Claims.Select(X => X.Type);
             return Ok();
         }
 

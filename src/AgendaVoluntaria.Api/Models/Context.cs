@@ -20,7 +20,7 @@ namespace AgendaVoluntaria.Api.Models
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Psico> Psicos { get; set; }
-        public DbSet<VolunteerShift> VolunteerShifts { get; set; }
+        public DbSet<UserShift> UserShifts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

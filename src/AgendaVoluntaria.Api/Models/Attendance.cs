@@ -19,11 +19,11 @@ namespace AgendaVoluntaria.Api.Models
         [Required]
         public double Longitude { get; set; }
 
-        public Guid IdVolunteer { get; set; }
+        public Guid IdUser { get; set; }
 
         [Required]
-        [ForeignKey("IdVolunteer")]
-        public Volunteer Volunteer { get; set; }
+        [ForeignKey("IdUser")]
+        public User User { get; set; }
 
         public Guid IdShift { get; set; }
 

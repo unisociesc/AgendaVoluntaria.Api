@@ -15,5 +15,8 @@ namespace AgendaVoluntaria.Api.Views
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Informar Nome")]
         public string Name { get; set; }
+
+        public int CPF { get; set; }
+        public string Phone { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using AgendaVoluntaria.Api.Models;
 
 namespace AgendaVoluntaria.Api.Repositories.Interfaces
 {
-    public interface IVolunteerShiftRepository : ICoreRepository<VolunteerShift>
+    public interface IVolunteerShiftRepository : ICoreRepository<UserShift>
     {
         int GetVolunteersCount(Guid id);
     }

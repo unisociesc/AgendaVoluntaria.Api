@@ -8,13 +8,13 @@ using AgendaVoluntaria.Api.Utils.Interfaces;
 
 namespace AgendaVoluntaria.Api.Repositories
 {
-    public class VolunteerShiftRepository : CoreRepository<VolunteerShift>,IVolunteerShiftRepository
+    public class UserShiftRepository : CoreRepository<UserShift>,IVolunteerShiftRepository
     {
-        public VolunteerShiftRepository(Context context, INotifier notifier) : base( context, notifier) { }
+        public UserShiftRepository(Context context, INotifier notifier) : base( context, notifier) { }
 
         public int GetVolunteersCount(Guid idShift)
         {
-            return _context.VolunteerShifts.Where(x => x.IdShift == idShift).Count();
+            return _context.UserShifts.Where(x => x.IdShift == idShift).Count();
         }
 
     }

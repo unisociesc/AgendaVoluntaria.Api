@@ -4,7 +4,7 @@ using AgendaVoluntaria.Api.Views.Core;
 
 namespace AgendaVoluntaria.Api.Views
 {
-    public class VolunteerShiftRequest : BaseRequest
+    public class UserShiftRequest : BaseRequest
     {
         [Required(ErrorMessage = "Informar a identificação do voluntário")]
         public Guid IdVolunteer { get; set; }
