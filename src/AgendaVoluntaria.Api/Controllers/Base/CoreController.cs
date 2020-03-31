@@ -18,17 +18,25 @@ namespace AgendaVoluntaria.Api.Controllers.Core
 
         protected bool OperationValid() => !_notifier.HaveNotification();
 
-        protected ActionResult CustomResponse(string title, object data)
+        protected ActionResult CustomResponse(string title, object data = null)
         {
             if (!OperationValid())
             {
                 return CustomBadRequest();
             }
-            return Ok(new
-            {
-                title,
-                data
-            });
+            
+            if (data != null)
+                return Ok(new
+                    {
+                        title,
+                        data
+                    });
+            else
+                return Ok(new
+                    {
+                        title
+                    });
+
         }
         protected ActionResult CustomCreated(string title, object data)
         {
