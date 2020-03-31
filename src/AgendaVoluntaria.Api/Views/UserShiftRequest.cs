@@ -6,8 +6,8 @@ namespace AgendaVoluntaria.Api.Views
 {
     public class UserShiftRequest : BaseRequest
     {
-        [Required(ErrorMessage = "Informar a identificação do voluntário")]
-        public Guid IdVolunteer { get; set; }
+        [Required(ErrorMessage = "Informar a identificação do usuário")]
+        public Guid IdUser { get; set; }
 
         [Required(ErrorMessage = "Informar a identificação do turno")]
         public Guid IdShift { get; set; }

@@ -60,9 +60,12 @@ namespace AgendaVoluntaria.Api.Repositories.Core
 
         public virtual async Task<TEntity> GetByIdAsync(Guid id)
         {
-            return await _context
-                .Set<TEntity>()
-                .FindAsync(id);
+            TEntity entity = await _context.Set<TEntity>().FindAsync(id);
+            if (entity == null)
+            {
+                _notifier.Add("Entidade " + typeof(TEntity) + " não encontrada");
+            }
+            return entity;
         }
 
         public async Task<int> UpdateAsync(TEntity entity)
