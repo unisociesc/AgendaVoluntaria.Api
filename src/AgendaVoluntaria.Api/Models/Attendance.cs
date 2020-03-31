@@ -10,8 +10,7 @@ namespace AgendaVoluntaria.Api.Models
         [Required]
         public DateTime Begin { get; set; }
 
-        [Required]
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
 
         [Required]
         public double Latitude { get; set; }

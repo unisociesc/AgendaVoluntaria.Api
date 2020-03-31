@@ -5,23 +5,44 @@ using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using AgendaVoluntaria.Api.Views;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
 {
     public class AttendanceService : CoreCrudService<Attendance, IAttendanceRepository>, IAttendanceService
     {
-        public AttendanceService(INotifier notifier, IAttendanceRepository repository ) : base(notifier, repository) { }
+        private readonly IUserShiftService userShiftService;
+
+        public AttendanceService(INotifier notifier, IAttendanceRepository repository, IUserShiftService userShiftService ) : base(notifier, repository) {
+            this.userShiftService = userShiftService;
+        }
 
         public async Task<int> SaveCheckIn(Attendance attendance)
         {
+            attendance.Begin = DateTime.Now;
+            
+            var userShifts = await userShiftService.GetUserShiftsByUser(attendance.IdUser);
 
-            // TODO: Pegar horario de
-            var beginTime = DateTime.Now;
+            var shift = userShifts.Where(x => x.Shift.Begin.Day == DateTime.Now.Day).FirstOrDefault().Shift;
 
-            if (DateTime.Now < beginTime.AddMinutes(-15) || DateTime.Now > beginTime.AddMinutes(15))
+            if (shift == null)
+            {
+                _notifier.Add("Não existem agenda para hoje");
+                return -1;
+            }
+
+            attendance.IdShift = shift.Id;
+
+            if (DateTime.Now < shift.Begin.AddMinutes(-15) || DateTime.Now > shift.Begin.AddMinutes(15))
             {
                 _notifier.Add("Não é possivel fazer o check-in com mais de 15 min de diferença");
+                return -1;
+            }
+
+            if ((attendance.Latitude >= 26.284406 && attendance.Latitude <= -26.290933) || (attendance.Longitude >= -48.809409 && attendance.Longitude <= -48.817181) )
+            {
+                _notifier.Add("A Sua localização não coresponde ao Campus Boa Vista");
                 return -1;
             }
 

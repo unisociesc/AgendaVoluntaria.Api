@@ -23,13 +23,18 @@ namespace AgendaVoluntaria.Api.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// (attendance.Latitude >= 26.284406 && attendance.Latitude <= -26.290933) || (attendance.Longitude >= -48.809409 && attendance.Longitude <= -48.817181)
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [Route("in")]
         [HttpPost]
-        public async Task<IActionResult> In(CheckRequest request)
+        public async Task<IActionResult> In(CheckRequest geolocalizacao)
         {
-            Attendance attendance = this.mapper.Map<Attendance>(request);
+            Attendance attendance = this.mapper.Map<Attendance>(geolocalizacao);
             attendance.IdUser = Guid.Parse(GetClaim("IdUser"));
-            await _attendanceService.CreateAsync(attendance);
+            await _attendanceService.SaveCheckIn(attendance);
             return CustomResponse("Check-In registrado!");
         }
 

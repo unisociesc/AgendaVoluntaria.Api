@@ -42,6 +42,7 @@
             </summary>
             <returns></returns>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:AgendaVoluntaria.Api.Controllers.CheckController.In(AgendaVoluntaria.Api.Views.CheckRequest)" -->
         <member name="P:AgendaVoluntaria.Api.Views.Core.BaseResponse.Id">
             <summary>
             Código identificador
@@ -55,6 +56,11 @@
         <member name="P:AgendaVoluntaria.Api.Views.Core.BaseResponse.UpdateAt">
             <summary>
             Data da ultima atualização do registro
+            </summary>
+        </member>
+        <member name="P:AgendaVoluntaria.Api.Views.UserRequest.Role">
+            <summary>
+            admin, volunteer, psico
             </summary>
         </member>
     </members>
