@@ -30,7 +30,7 @@ namespace AgendaVoluntaria.Api.Models
 
             modelBuilder.Entity<Shift>(entity =>
             {
-                var lastShift = new DateTime(2020, 03, 20, 0, 0, 0, 0);
+                var lastShift = new DateTime(2020, 03, 20, 0, 0, 0, 0, DateTimeKind.Local);
                 List<Shift> list = new List<Shift>();
                 for (int i = 0; i < 1105; i++)
                 {
@@ -39,7 +39,9 @@ namespace AgendaVoluntaria.Api.Models
                         Id = NewId.NextGuid(),
                         Begin = lastShift,
                         End = lastShift.AddHours(6),
-                        MaxVolunteer = lastShift.Hour == 0 && lastShift.AddHours(6).Hour == 6 ? 4 : 20
+                        MaxVolunteer = lastShift.Hour == 0 && lastShift.AddHours(6).Hour == 6 ? 4 : 20,
+                        CreateAt = new DateTime(2020, 03, 30, 23, 0, 0, DateTimeKind.Local),
+                        UpdateAt = new DateTime(2020, 03, 30, 23, 0, 0, 0, DateTimeKind.Local)
                     });
                     lastShift = lastShift.AddHours(6);
                 }
