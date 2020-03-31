@@ -11,5 +11,7 @@ namespace AgendaVoluntaria.Api.Views
         public DateTime End { get; set; }
 
         public int MaxVolunteer { get; set; }   
+
+        public int TotalVolunteers { get; set; }
     }
 }
