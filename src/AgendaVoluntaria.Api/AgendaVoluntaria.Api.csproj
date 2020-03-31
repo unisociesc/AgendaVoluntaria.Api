@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20200331040312_AdicionadoDadosDeUsuario.Designer.cs" />
     <Compile Remove="Migrations\20200331041057_AdicionadoDadosDeUsuario.cs" />
     <Compile Remove="Migrations\20200331041057_AdicionadoDadosDeUsuario.Designer.cs" />
+    <Compile Remove="Migrations\20200331043759_Seed.cs" />
+    <Compile Remove="Migrations\20200331043759_Seed.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
