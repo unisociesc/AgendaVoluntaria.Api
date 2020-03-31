@@ -13,16 +13,26 @@ namespace AgendaVoluntaria.Api.Services
     {
         private readonly IShiftRepository _shiftRepository;
         private readonly IVolunteerRepository _volunteerRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserShiftService(INotifier notifier, IVolunteerShiftRepository repository, IShiftRepository shiftRepository, IVolunteerRepository volunteerRepository) : base(notifier, repository)
+        public UserShiftService(INotifier notifier, IVolunteerShiftRepository repository, IShiftRepository shiftRepository, IVolunteerRepository volunteerRepository, IUserRepository userRepository) : base(notifier, repository)
         {
             _shiftRepository = shiftRepository;
             _volunteerRepository = volunteerRepository;
+            _userRepository = userRepository;
         }
 
         public override async Task<int> CreateAsync(UserShift volunteerShift)
         {
+            User user = await _userRepository.GetByIdAsync(volunteerShift.IdUser);
+
+            if (user == null)
+                return -1;
+
             Shift shift = await _shiftRepository.GetByIdAsync(volunteerShift.IdShift);
+
+            if (shift == null)
+                return -1; 
 
             var volunteerShifts = await _volunteerRepository.GetShiftsByVolunteerId(volunteerShift.IdUser);
 
@@ -37,7 +47,7 @@ namespace AgendaVoluntaria.Api.Services
 
             int volunteers = _shiftRepository.GetVolunteersCountById(volunteerShift.IdShift);
 
-            if (shift.MaxVolunteer >= volunteers)
+            if (volunteers >= shift.MaxVolunteer)
             {
                 _notifier.Add("Limite de voluntários excedido para este turno");
                 return -1;

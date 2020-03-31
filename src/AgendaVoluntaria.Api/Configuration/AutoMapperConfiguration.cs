@@ -32,6 +32,8 @@ namespace AgendaVoluntaria.Api.Configuration
 
             CreateMap<ShiftViewlModel, ShiftResponse>();
 
+            CreateMap<UserShiftRequest, UserShift>();
+            CreateMap<UserShift, UserShiftResponse>();
         }
     }
 }

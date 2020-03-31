@@ -6,7 +6,7 @@ namespace AgendaVoluntaria.Api.Views
 {
     public class UserShiftResponse : BaseResponse
     {
-        public Guid IdVolunteer { get; set; }
+        public Guid IdUser { get; set; }
 
         public Guid IdShift { get; set; }
     }
