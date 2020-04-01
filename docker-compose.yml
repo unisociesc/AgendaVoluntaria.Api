@@ -1,17 +1,87 @@
-version: "3.7"
+version: '3.4'
 
-services: 
+services:
   api:
+    image: unisociesc/agendavoluntaria:latest
     build:
       context: .
-      dockerfile: ./src/AgendaVoluntaria.Api/dockerfile
-    environment: 
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_ConnectionStrings__AgendaVoluntariaDatabase
-    ports: 
-      - "5000:443"
-  db: 
+      dockerfile: src/AgendaVoluntaria.Api/Dockerfile
+    networks:
+      - backend
+      - frontend
+    deploy:
+      replicas: 10
+      restart_policy:
+        condition: on-failure
+      update_config:
+        delay: 15s
+        parallelism: 5
+        failure_action: rollback
+      rollback_config:
+        parallelism: 5
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.helloworld.rule=Host(`server.prodcom.com.br`)"
+        - "traefik.http.routers.helloworld.entrypoints=websecure"
+        - "traefik.http.routers.helloworld.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.helloworld.loadbalancer.server.port=80"
+  
+  db:
     image: postgres:12.2
     environment: 
       - POSTGRES_PASSWORD=AgendaVoluntaria
       - POSTGRES_USER=AgendaVoluntaria
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+  
+  web:
+    image: nginx
+    networks:
+      - frontend
+    deploy:
+      replicas: 10
+      update_config:
+        delay: 15s
+        parallelism: 5
+        failure_action: rollback
+      rollback_config:
+        parallelism: 5
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.helloworld.rule=Host(`triagemcovid19.prodcom.com.br`)"
+        - "traefik.http.routers.helloworld.entrypoints=websecure"
+        - "traefik.http.routers.helloworld.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.helloworld.loadbalancer.server.port=80"
+
+volumes:
+  pg_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/www/agenda/db
+
+networks:
+  frontend:
+    external: true
+  backend:
+    external: true
+  
