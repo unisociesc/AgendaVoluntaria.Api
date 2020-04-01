@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
-    [Authorize(Roles = "volunteers")]
+    [Authorize]
     public class UserShiftsController : CoreCrudController<IUserShiftService, UserShiftRequest, UserShiftResponse, UserShift>
     {
         public UserShiftsController(INotifier notifier, IMapper mapper, IUserShiftService service) : base(notifier, mapper, service) { }

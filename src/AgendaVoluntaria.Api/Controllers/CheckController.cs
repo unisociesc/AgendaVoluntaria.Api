@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
-    [Authorize(Roles = "volunteers")]
+    [Authorize]
     public class CheckController : CoreController
     {
         private readonly IAttendanceService _attendanceService;

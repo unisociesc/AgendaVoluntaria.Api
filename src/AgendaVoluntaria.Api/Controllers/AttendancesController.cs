@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
-    [Authorize(Roles = "volunteers")]
+    [Authorize]
     public class AttendancesController : CoreCrudController<IAttendanceService, AttendanceRequest, AttendanceResponse, Attendance>
     {
         public AttendancesController(INotifier notifier, IMapper mapper, IAttendanceService service) : base(notifier, mapper, service) { }

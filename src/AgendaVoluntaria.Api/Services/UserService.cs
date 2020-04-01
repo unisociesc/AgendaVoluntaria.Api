@@ -27,5 +27,11 @@ namespace AgendaVoluntaria.Api.Services
             _notifier.Add("Já existe um usuario cadastrado com este email");
             return -1;
         }
+
+        public override Task<int> UpdateAsync(User entity)
+        {
+            entity.Password = SecurityUtils.EncryptPassword(entity.Password);
+            return base.UpdateAsync(entity);
+        }
     }
 }

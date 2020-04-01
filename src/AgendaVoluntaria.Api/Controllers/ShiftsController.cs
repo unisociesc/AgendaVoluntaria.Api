@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class ShiftsController : CoreCrudController<IShiftService, ShiftRequest, ShiftResponse, Shift>
     {
         private readonly IMapper _mapper;
