@@ -11,6 +11,5 @@ namespace AgendaVoluntaria.Api.Services.Interfaces
         Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync();
 
         Task<IList<ShiftViewlModel>> GetAllByNextDays(int days);
-        int GetVolunteersCountById(Guid idShift);
     }
 }

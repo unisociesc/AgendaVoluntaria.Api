@@ -4,6 +4,8 @@ using AgendaVoluntaria.Api.Services.Core;
 using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils;
 using AgendaVoluntaria.Api.Utils.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
@@ -25,6 +27,5 @@ namespace AgendaVoluntaria.Api.Services
             _notifier.Add("Já existe um usuario cadastrado com este email");
             return -1;
         }
-
     }
 }

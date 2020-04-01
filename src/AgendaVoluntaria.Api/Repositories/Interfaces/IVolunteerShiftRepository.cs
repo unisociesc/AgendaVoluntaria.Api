@@ -10,5 +10,7 @@ namespace AgendaVoluntaria.Api.Repositories.Interfaces
         int GetVolunteersCount(Guid id);
 
         public Task<List<UserShift>> GetUserShiftsByUser(Guid idUser);
+
+        Task<IList<Shift>> GetShiftsByUserId(Guid guid);
     }
 }

@@ -15,7 +15,7 @@ namespace AgendaVoluntaria.Api.Models
 
         [Required]
         public int MaxVolunteer { get; set; }
-        public ICollection<UserShift> UserShifts { get; set; }
+        public virtual ICollection<UserShift> UserShifts { get; set; }
 
     }
 }

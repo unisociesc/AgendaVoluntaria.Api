@@ -5,6 +5,7 @@ using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
@@ -39,19 +40,17 @@ namespace AgendaVoluntaria.Api.Services
             if (shift == null)
                 return -1;
 
-            // TODO:  Corrigir
-            //var volunteerShifts = await _volunteerService.GetShiftsByVolunteerId(volunteerShift.IdUser);
 
-            //var volunteerShiftsQuerable = volunteerShifts
-            //    .Where(x => x.Begin.AddHours(24) < shift.Begin && x.Begin.AddHours(-24) > shift.Begin);
+            var volunteerShifts = await _repository.GetShiftsByUserId(volunteerShift.IdUser);
+            var volunteerShiftsQuerable = volunteerShifts
+                .Where(x => x.Begin.AddHours(24) > shift.Begin && x.Begin.AddHours(-24) < shift.Begin);
+            if (volunteerShiftsQuerable.Any())
+            {
+                _notifier.Add("Existe outro turno já atribuido ao voluntario, com intervalo menor de 24 horas");
+                return -1;
+            }
 
-            //if (volunteerShiftsQuerable.Any())
-            //{
-            //    _notifier.Add("Existe outro turno já atribuido ao voluntario, com intervalo menor de 24 horas");
-            //    return -1;
-            //}
-
-            int volunteers = _shiftService.GetVolunteersCountById(volunteerShift.IdShift);
+            int volunteers = _repository.GetVolunteersCount(shift.Id);
 
             if (volunteers >= shift.MaxVolunteer)
             {

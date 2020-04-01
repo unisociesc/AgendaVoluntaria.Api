@@ -55,7 +55,8 @@ namespace AgendaVoluntaria.Api
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
             services.AddDbContext<Context>(options =>
 
-                options.UseNpgsql(Configuration.GetConnectionString("AgendaVoluntariaDatabase"))
+                options.UseLazyLoadingProxies().UseNpgsql(Configuration.GetConnectionString("AgendaVoluntariaDatabase"))
+
             );
 
             services.AddControllers()

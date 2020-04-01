@@ -3,6 +3,7 @@ using AgendaVoluntaria.Api.Repositories.Core;
 using AgendaVoluntaria.Api.Repositories.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,15 @@ namespace AgendaVoluntaria.Api.Repositories
     public class UserShiftRepository : CoreRepository<UserShift>, IUserShiftRepository
     {
         public UserShiftRepository(Context context, INotifier notifier) : base(context, notifier) { }
+
+        public async Task<IList<Shift>> GetShiftsByUserId(Guid guid)
+        {
+            return await _context.UserShifts
+                .Join(_context.Shifts, UserShift => UserShift.IdShift, Shift => Shift.Id, (UserShift, Shift) => new { UserShift, Shift })
+                .Where(x => x.UserShift.IdUser == guid)
+                .Select(x => x.Shift)
+                .ToListAsync();
+        }
 
         public async Task<List<UserShift>> GetUserShiftsByUser(Guid idUser)
         {

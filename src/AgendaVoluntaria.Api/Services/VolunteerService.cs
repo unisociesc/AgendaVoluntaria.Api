@@ -12,9 +12,5 @@ namespace AgendaVoluntaria.Api.Services
     {
         public VolunteerService(INotifier notifier, IVolunteerRepository repository) : base(notifier, repository) { }
 
-        public Task GetShiftsByVolunteerId(Guid idUser)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

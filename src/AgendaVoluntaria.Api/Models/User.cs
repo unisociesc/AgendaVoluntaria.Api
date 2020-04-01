@@ -26,8 +26,8 @@ namespace AgendaVoluntaria.Api.Models
         [Required]
         public string Role { get; set; }
 
-        public Volunteer Volunteer { get; set; }
+        public virtual Volunteer Volunteer { get; set; }
 
-        public ICollection<UserShift> UserShifts { get; set; }
+        public virtual ICollection<UserShift> UserShifts { get; set; }
     }
 }

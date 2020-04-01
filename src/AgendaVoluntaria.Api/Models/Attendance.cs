@@ -22,12 +22,12 @@ namespace AgendaVoluntaria.Api.Models
 
         [Required]
         [ForeignKey("IdUser")]
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         public Guid IdShift { get; set; }
 
         [Required]
         [ForeignKey("IdShift")]
-        public Shift Shift { get; set; }
+        public virtual Shift Shift { get; set; }
     }
 }

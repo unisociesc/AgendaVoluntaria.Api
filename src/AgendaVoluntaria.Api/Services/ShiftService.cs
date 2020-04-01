@@ -23,10 +23,5 @@ namespace AgendaVoluntaria.Api.Services
         {
             return _repository.GetAllWithTotalVolunteersAsync();
         }
-
-        public int GetVolunteersCountById(Guid idShift)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

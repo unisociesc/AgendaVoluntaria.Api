@@ -18,7 +18,9 @@ namespace AgendaVoluntaria.Api.Repositories
         public async Task<IList<ShiftViewlModel>> GetAllByNextDays(int days)
         {
             DateTime dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            return await _context.Shifts
+            return await  _context.Shifts
+                .Include(x => x.UserShifts)
+                    .ThenInclude(x => x.User)
                 .Where(x => x.Begin >= dateTime && x.Begin < dateTime.AddDays(days))
                 .Select(x => new ShiftViewlModel
                 {
@@ -26,33 +28,33 @@ namespace AgendaVoluntaria.Api.Repositories
                     Begin = x.Begin,
                     End = x.End,
                     MaxVolunteer = x.MaxVolunteer,
+                    TotalVolunteers = x.UserShifts.Count(),
                     CreateAt = x.CreateAt,
                     UpdateAt = x.UpdateAt
                 })
                 .OrderBy(x => x.Begin)
                 .ToListAsync();
+                
         }
 
         public async Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync()
         {
             var shifts = await _context.Shifts
+                .Include(x => x.UserShifts)
+                .ThenInclude(x => x.User)
                 .Select(x => new ShiftViewlModel
                 {
                     Id = x.Id,
                     Begin = x.Begin,
                     End = x.End,
                     MaxVolunteer = x.MaxVolunteer,
+                    TotalVolunteers = x.UserShifts.Count(),
                     CreateAt = x.CreateAt,
                     UpdateAt = x.UpdateAt
                 })
                 .OrderBy(x => x.Begin)
                 .ToListAsync();
 
-            var volunteerShiftsList = await _context.UserShifts.ToListAsync();
-            foreach (var shift in shifts)
-            {
-                shift.TotalVolunteer = volunteerShiftsList.Where(x => x.IdShift == shift.Id).Count();
-            }
             return shifts;
         }
     }
