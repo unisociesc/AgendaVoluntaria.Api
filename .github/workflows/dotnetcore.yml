@@ -8,3 +8,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build Image
+      run: docker image build -f "./src/AgendaVoluntaria.Api/Dockerfile" -t agendavoluntaria:beta .
