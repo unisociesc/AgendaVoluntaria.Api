@@ -7,22 +7,14 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.101
-    - name: Install dependencies
-      run: dotnet restore ./src/AgendaVoluntaria.Api/AgendaVoluntaria.Api.csproj
-    - name: Build
-      run: dotnet build ./src/AgendaVoluntaria.Api/AgendaVoluntaria.Api.csproj --configuration Release --no-restore 
-    - name: Publish
-      run: dotnet publish ./src/AgendaVoluntaria.Api/AgendaVoluntaria.Api.csproj --configuration Release --no-restore
+    - name: Build Image
+      run: docker image build -rm -f "./src/AgendaVoluntaria.Api/Dockerfile" -t agendavoluntaria:beta .
       
     #- name: Test
     # run: dotnet test --no-restore --verbosity normal
