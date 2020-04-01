@@ -1,4 +1,4 @@
-name: .NET Core
+name: .NET Build For PR
 
 on:
   push:
@@ -18,9 +18,11 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ./src/AgendaVoluntaria.Api/AgendaVoluntaria.Api.csproj
     - name: Build
       run: dotnet build ./src/AgendaVoluntaria.Api/AgendaVoluntaria.Api.csproj --configuration Release --no-restore 
+    - name: Publish
+      run: dotnet publish ./src/AgendaVoluntaria.Api/AgendaVoluntaria.Api.csproj --configuration Release --no-restore
       
     #- name: Test
     # run: dotnet test --no-restore --verbosity normal
