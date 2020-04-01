@@ -1,5 +1,4 @@
 ﻿using AgendaVoluntaria.Api.Models.Core;
-using AgendaVoluntaria.Api.Models.Interfaces;
 using AgendaVoluntaria.Api.Repositories.Interfaces;
 using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;

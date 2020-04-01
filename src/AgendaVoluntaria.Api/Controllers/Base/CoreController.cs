@@ -24,18 +24,18 @@ namespace AgendaVoluntaria.Api.Controllers.Core
             {
                 return CustomBadRequest();
             }
-            
+
             if (data != null)
                 return Ok(new
-                    {
-                        title,
-                        data
-                    });
+                {
+                    title,
+                    data
+                });
             else
                 return Ok(new
-                    {
-                        title
-                    });
+                {
+                    title
+                });
 
         }
         protected ActionResult CustomCreated(string title, object data)
@@ -44,7 +44,7 @@ namespace AgendaVoluntaria.Api.Controllers.Core
             {
                 return CustomBadRequest();
             }
-            return Created("",  new
+            return Created("", new
             {
                 title,
                 data

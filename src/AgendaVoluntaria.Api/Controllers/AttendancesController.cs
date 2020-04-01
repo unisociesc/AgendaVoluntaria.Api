@@ -7,8 +7,8 @@ using AutoMapper;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
-    public class AttendancesController : CoreCrudController<IAttendanceService,AttendanceRequest,AttendanceResponse,Attendance>
+    public class AttendancesController : CoreCrudController<IAttendanceService, AttendanceRequest, AttendanceResponse, Attendance>
     {
-        public AttendancesController(INotifier notifier, IMapper mapper, IAttendanceService service) : base(notifier, mapper, service) {}
+        public AttendancesController(INotifier notifier, IMapper mapper, IAttendanceService service) : base(notifier, mapper, service) { }
     }
 }

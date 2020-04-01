@@ -5,8 +5,8 @@ using AgendaVoluntaria.Api.Utils.Interfaces;
 
 namespace AgendaVoluntaria.Api.Repositories
 {
-    public class PsicoRepository : CoreRepository<Psico>,IPsicoRepository
+    public class PsicoRepository : CoreRepository<Psico>, IPsicoRepository
     {
-        public PsicoRepository(Context context, INotifier notifier) : base( context, notifier) {}
+        public PsicoRepository(Context context, INotifier notifier) : base(context, notifier) { }
     }
 }

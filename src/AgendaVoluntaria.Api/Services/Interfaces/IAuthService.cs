@@ -1,5 +1,4 @@
-﻿using AgendaVoluntaria.Api.Models;
-using AgendaVoluntaria.Api.Views;
+﻿using AgendaVoluntaria.Api.Views;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services.Interfaces

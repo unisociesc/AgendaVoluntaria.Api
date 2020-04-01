@@ -1,6 +1,6 @@
+using AgendaVoluntaria.Api.Views.Core;
 using System;
 using System.ComponentModel.DataAnnotations;
-using AgendaVoluntaria.Api.Views.Core;
 
 namespace AgendaVoluntaria.Api.Views
 {
@@ -14,6 +14,6 @@ namespace AgendaVoluntaria.Api.Views
 
         [Required(ErrorMessage = "Informar o número de voluntários do turno")]
         [Range(1, Int64.MaxValue, ErrorMessage = "O número de voluntários do turno deve ser maior que 0")]
-        public int MaxVolunteer { get; set; }   
+        public int MaxVolunteer { get; set; }
     }
 }

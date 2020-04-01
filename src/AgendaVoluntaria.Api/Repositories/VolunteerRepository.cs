@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Repositories
 {
-    public class VolunteerRepository : CoreRepository<Volunteer>,IVolunteerRepository
+    public class VolunteerRepository : CoreRepository<Volunteer>, IVolunteerRepository
     {
-        public VolunteerRepository(Context context, INotifier notifier) : base( context, notifier) {}
+        public VolunteerRepository(Context context, INotifier notifier) : base(context, notifier) { }
 
         public async Task<IList<Shift>> GetShiftsByVolunteerId(Guid volunteerId)
         {

@@ -1,6 +1,5 @@
-using System;
-using System.ComponentModel.DataAnnotations;
 using AgendaVoluntaria.Api.Views.Core;
+using System;
 
 namespace AgendaVoluntaria.Api.Views
 {
@@ -10,7 +9,7 @@ namespace AgendaVoluntaria.Api.Views
 
         public DateTime End { get; set; }
 
-        public int MaxVolunteer { get; set; }   
+        public int MaxVolunteer { get; set; }
 
         public int TotalVolunteers { get; set; }
     }

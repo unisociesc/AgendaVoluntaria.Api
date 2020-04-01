@@ -3,7 +3,6 @@ using AgendaVoluntaria.Api.Repositories.Interfaces;
 using AgendaVoluntaria.Api.Services.Core;
 using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
-using AgendaVoluntaria.Api.Views;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,14 +13,15 @@ namespace AgendaVoluntaria.Api.Services
     {
         private readonly IUserShiftService userShiftService;
 
-        public AttendanceService(INotifier notifier, IAttendanceRepository repository, IUserShiftService userShiftService ) : base(notifier, repository) {
+        public AttendanceService(INotifier notifier, IAttendanceRepository repository, IUserShiftService userShiftService) : base(notifier, repository)
+        {
             this.userShiftService = userShiftService;
         }
 
         public async Task<int> SaveCheckIn(Attendance attendance)
         {
             attendance.Begin = DateTime.Now;
-            
+
             var userShifts = await userShiftService.GetUserShiftsByUser(attendance.IdUser);
 
             var shift = userShifts.Where(x => x.Shift.Begin.Day == DateTime.Now.Day).FirstOrDefault().Shift;
@@ -40,7 +40,7 @@ namespace AgendaVoluntaria.Api.Services
                 return -1;
             }
 
-            if ((attendance.Latitude >= 26.284406 && attendance.Latitude <= -26.290933) || (attendance.Longitude >= -48.809409 && attendance.Longitude <= -48.817181) )
+            if ((attendance.Latitude >= 26.284406 && attendance.Latitude <= -26.290933) || (attendance.Longitude >= -48.809409 && attendance.Longitude <= -48.817181))
             {
                 _notifier.Add("A Sua localização não coresponde ao Campus Boa Vista");
                 return -1;

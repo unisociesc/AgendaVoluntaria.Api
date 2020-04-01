@@ -19,7 +19,7 @@ namespace AgendaVoluntaria.Api.Views
         [Required(AllowEmptyStrings = false, ErrorMessage = "Informar CPF")]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "o CPF deve conter {1} Caracteres")]
         public string CPF { get; set; }
-        
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Informar Telefone")]
         public string Phone { get; set; }
 

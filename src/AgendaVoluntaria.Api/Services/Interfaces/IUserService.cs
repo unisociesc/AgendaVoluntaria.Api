@@ -2,8 +2,8 @@
 
 namespace AgendaVoluntaria.Api.Services.Interfaces
 {
-    public interface IUserService : ICoreCrudService<User> 
+    public interface IUserService : ICoreCrudService<User>
     {
-        
+
     }
 }

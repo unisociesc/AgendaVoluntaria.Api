@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
 {
-    public class ShiftService : CoreCrudService<Shift, IShiftRepository>,IShiftService
+    public class ShiftService : CoreCrudService<Shift, IShiftRepository>, IShiftService
     {
         public ShiftService(INotifier notifier, IShiftRepository repository) : base(notifier, repository) { }
 

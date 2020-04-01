@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AgendaVoluntaria.Api.Models;
 using AgendaVoluntaria.Api.Repositories.Interfaces;
 using AgendaVoluntaria.Api.Services.Core;
 using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
 {
@@ -38,7 +37,7 @@ namespace AgendaVoluntaria.Api.Services
             Shift shift = await _shiftService.GetByIdAsync(volunteerShift.IdShift);
 
             if (shift == null)
-                return -1; 
+                return -1;
 
             // TODO:  Corrigir
             //var volunteerShifts = await _volunteerService.GetShiftsByVolunteerId(volunteerShift.IdUser);

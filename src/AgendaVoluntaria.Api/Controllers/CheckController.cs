@@ -4,10 +4,8 @@ using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using AgendaVoluntaria.Api.Views;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Controllers
@@ -38,7 +36,7 @@ namespace AgendaVoluntaria.Api.Controllers
             return CustomResponse("Check-In registrado!");
         }
 
-        
+
         [HttpPost]
         [Route("out")]
         public async Task<IActionResult> Out(CheckRequest request)

@@ -7,8 +7,8 @@ using AutoMapper;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
-    public class PsicosController : CoreCrudController<IPsicoService,PsicoRequest,PsicoResponse,Psico>
+    public class PsicosController : CoreCrudController<IPsicoService, PsicoRequest, PsicoResponse, Psico>
     {
-        public PsicosController(INotifier notifier, IMapper mapper, IPsicoService service) : base(notifier, mapper, service) {}
+        public PsicosController(INotifier notifier, IMapper mapper, IPsicoService service) : base(notifier, mapper, service) { }
     }
 }

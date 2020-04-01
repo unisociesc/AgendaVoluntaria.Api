@@ -27,5 +27,7 @@ namespace AgendaVoluntaria.Api.Models
         public string Role { get; set; }
 
         public Volunteer Volunteer { get; set; }
+
+        public ICollection<UserShift> UserShifts { get; set; }
     }
 }

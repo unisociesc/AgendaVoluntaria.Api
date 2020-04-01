@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using AgendaVoluntaria.Api.Models;
-using AgendaVoluntaria.Api.Views;
+﻿using AgendaVoluntaria.Api.Models;
 using AgendaVoluntaria.Api.ViewModel;
+using AgendaVoluntaria.Api.Views;
+using AutoMapper;
 
 namespace AgendaVoluntaria.Api.Configuration
 {
@@ -9,7 +9,7 @@ namespace AgendaVoluntaria.Api.Configuration
     {
         public AutoMapperConfiguration()
         {
-            
+
 
             CreateMap<ShiftRequest, Shift>();
             CreateMap<Shift, ShiftResponse>();

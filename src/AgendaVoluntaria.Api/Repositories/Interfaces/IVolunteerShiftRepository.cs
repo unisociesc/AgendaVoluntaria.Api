@@ -1,7 +1,7 @@
+using AgendaVoluntaria.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AgendaVoluntaria.Api.Models;
 
 namespace AgendaVoluntaria.Api.Repositories.Interfaces
 {

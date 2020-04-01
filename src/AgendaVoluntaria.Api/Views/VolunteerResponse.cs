@@ -1,6 +1,5 @@
-using System;
-using System.ComponentModel.DataAnnotations;
 using AgendaVoluntaria.Api.Views.Core;
+using System;
 
 namespace AgendaVoluntaria.Api.Views
 {

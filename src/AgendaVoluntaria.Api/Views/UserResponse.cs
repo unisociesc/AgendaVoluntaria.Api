@@ -1,7 +1,4 @@
-﻿using AgendaVoluntaria.Api.Models;
-using AgendaVoluntaria.Api.Views.Core;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using AgendaVoluntaria.Api.Views.Core;
 
 namespace AgendaVoluntaria.Api.Views
 {

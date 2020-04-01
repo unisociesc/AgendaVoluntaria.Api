@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AgendaVoluntaria.Api.Views
+﻿namespace AgendaVoluntaria.Api.Views
 {
     public class CheckRequest
     {

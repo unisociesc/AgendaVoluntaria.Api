@@ -1,14 +1,9 @@
 ﻿using AgendaVoluntaria.Api.Models;
-using AgendaVoluntaria.Api.Models.Interfaces;
 using AgendaVoluntaria.Api.Repositories.Interfaces;
 using AgendaVoluntaria.Api.Services.Core;
 using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils;
 using AgendaVoluntaria.Api.Utils.Interfaces;
-using AgendaVoluntaria.Api.Views;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
@@ -24,7 +19,7 @@ namespace AgendaVoluntaria.Api.Services
             var user = _repository.GetByAsync(x => x.Email == newUser.Email);
             if (user == null)
             {
-                if(string.IsNullOrWhiteSpace(newUser.Role)) newUser.Role = "volunteers";
+                if (string.IsNullOrWhiteSpace(newUser.Role)) newUser.Role = "volunteers";
                 return await base.CreateAsync(newUser);
             }
             _notifier.Add("Já existe um usuario cadastrado com este email");

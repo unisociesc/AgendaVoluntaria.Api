@@ -37,7 +37,7 @@ namespace AgendaVoluntaria.Api.Services
                 _notifier.Add("Usuário não encontrado");
                 return null;
             }
-            
+
             var user = users.FirstOrDefault();
             if (user.Password == SecurityUtils.EncryptPassword(userLogin.Password))
             {
