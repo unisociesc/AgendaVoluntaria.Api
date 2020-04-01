@@ -46,7 +46,7 @@ namespace AgendaVoluntaria.Api.Controllers
                     item.Id,
                     item.MaxVolunteer,
                     item.TotalVolunteers,
-                    date = item.Begin.ToString("dd-MM-yyyy"),
+                    date = item.Begin,
                     hours = new
                     {
                         Begin = item.Begin.ToString("HH:mm"),
