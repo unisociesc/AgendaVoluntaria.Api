@@ -4,13 +4,8 @@ on: pull_request
 
 jobs:
   build-and-test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Build Image
       run: docker image build -f "./src/AgendaVoluntaria.Api/Dockerfile" -t agendavoluntaria:beta .
-      
-    #- name: Test
-    # run: dotnet test --no-restore --verbosity normal
