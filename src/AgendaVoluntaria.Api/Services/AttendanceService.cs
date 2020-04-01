@@ -28,7 +28,7 @@ namespace AgendaVoluntaria.Api.Services
 
             if (shift == null)
             {
-                _notifier.Add("Não existem agenda para hoje");
+                _notifier.Add("NÃ£o existem agenda para hoje");
                 return -1;
             }
 
@@ -37,14 +37,14 @@ namespace AgendaVoluntaria.Api.Services
 
             if (DateTime.Now < shift.Begin.AddMinutes(-15) || DateTime.Now > shift.Begin.AddMinutes(15))
             {
-                _notifier.Add("Não é possivel fazer o check-in com mais de 15 min de diferença");
+                _notifier.Add("NÃ£o Ã© possivel fazer o check-in com mais de 15 min de diferenÃ§a");
                 return -1;
             }
 
-            // TODO: Configura Geolocalização
+            // TODO: Configura GeolocalizaÃ§Ã£o
             //if ((attendance.Latitude >= 26.284406 && attendance.Latitude <= -26.290933) || (attendance.Longitude >= -48.809409 && attendance.Longitude <= -48.817181))
             //{
-            //    _notifier.Add("A Sua localização não coresponde ao Campus Boa Vista");
+            //    _notifier.Add("A Sua localizaÃ§Ã£o nÃ£o coresponde ao Campus Boa Vista");
             //    return -1;
             //}
 
