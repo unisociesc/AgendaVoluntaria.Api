@@ -4,12 +4,14 @@ using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using AgendaVoluntaria.Api.Views;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ShiftsController : CoreCrudController<IShiftService, ShiftRequest, ShiftResponse, Shift>
     {
         private readonly IMapper _mapper;

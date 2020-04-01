@@ -4,12 +4,14 @@ using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using AgendaVoluntaria.Api.Views;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Controllers
 {
+    [Authorize(Roles = "volunteers")]
     public class CheckController : CoreController
     {
         private readonly IAttendanceService _attendanceService;
