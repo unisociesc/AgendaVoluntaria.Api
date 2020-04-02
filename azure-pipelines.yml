@@ -43,7 +43,7 @@ stages:
     - task: Docker@2
       displayName: Push an image
       condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
       inputs:
         containerRegistry: 'Docker Hub - Gabriel Meyer'
         repository: 'unisociesc/agendavoluntaria-api'
@@ -67,6 +67,7 @@ stages:
         sshEndpoint: 'Servidor ProdCom'
         runOptions: 'inline'
         inline: 'docker stack deploy -c /var/www/api/docker-compose.yml agenda-api'
+        failOnStdErr: false
         readyTimeout: '20000'
     
     - task: GitHubRelease@1
