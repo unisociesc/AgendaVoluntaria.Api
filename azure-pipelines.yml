@@ -26,9 +26,6 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - bash: |
-        echo "##vso[build.updatebuildnumber] $(tag)"
-
     - task: Docker@2
       displayName: Build an image
       inputs:
