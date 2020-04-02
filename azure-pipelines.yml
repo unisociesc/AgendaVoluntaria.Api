@@ -6,7 +6,7 @@ trigger:
   batch: true
   branches:
     include:
-    - release/*
+    - release/1
     - master
 
 pr:
@@ -68,3 +68,16 @@ stages:
         runOptions: 'inline'
         inline: 'docker stack deploy -c /var/www/api/docker-compose.yml agenda-api'
         readyTimeout: '20000'
+    
+    - task: GitHubRelease@1
+      condition: |
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
+      inputs:
+        gitHubConnection: 'github.com_GHMeyer0'
+        repositoryName: '$(Build.Repository.Name)'
+        action: 'create'
+        target: '$(Build.SourceVersion)'
+        tagSource: 'gitTag'
+        tagPattern: '$(tag)'
+        changeLogCompareToRelease: 'lastFullRelease'
+        changeLogType: 'commitBased''
