@@ -20,4 +20,5 @@ RUN dotnet publish "AgendaVoluntaria.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_ENVIRONMENT=Development
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet AgendaVoluntaria.Api.dll
