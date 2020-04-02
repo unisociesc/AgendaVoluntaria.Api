@@ -41,7 +41,7 @@ stages:
     - task: Docker@2
       displayName: Push an image
       condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master' )
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
       inputs:
         containerRegistry: 'Docker Hub - Gabriel Meyer'
         repository: 'unisociesc/agendavoluntaria-api'
@@ -51,7 +51,7 @@ stages:
 
     - task: CopyFilesOverSSH@0
       condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master' )
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
       inputs:
         sshEndpoint: 'Servidor ProdCom'
         sourceFolder: '$(Build.SourcesDirectory)'
@@ -60,7 +60,7 @@ stages:
         readyTimeout: '20000'
     - task: SSH@0
       condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master' )
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
       inputs:
         sshEndpoint: 'Servidor ProdCom'
         runOptions: 'inline'
