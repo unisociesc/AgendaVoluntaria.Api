@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.7'
 
 services:
   api:
@@ -29,10 +29,10 @@ services:
           memory: 128M
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.helloworld.rule=Host(`server.prodcom.com.br`)"
-        - "traefik.http.routers.helloworld.entrypoints=websecure"
-        - "traefik.http.routers.helloworld.tls.certresolver=letsencryptresolver"
-        - "traefik.http.services.helloworld.loadbalancer.server.port=80"
+        - "traefik.http.routers.api.rule=Host(`server.prodcom.com.br`)"
+        - "traefik.http.routers.api.entrypoints=websecure"
+        - "traefik.http.routers.api.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.api.loadbalancer.server.port=80"
   
   db:
     image: postgres:12.2
@@ -43,33 +43,6 @@ services:
       - pg_data:/var/lib/postgresql/data
     networks:
       - backend
-  
-  web:
-    image: nginx
-    networks:
-      - frontend
-    deploy:
-      replicas: 10
-      update_config:
-        delay: 15s
-        parallelism: 5
-        failure_action: rollback
-      rollback_config:
-        parallelism: 5
-        delay: 10s
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 128M
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.helloworld.rule=Host(`triagemcovid19.prodcom.com.br`)"
-        - "traefik.http.routers.helloworld.entrypoints=websecure"
-        - "traefik.http.routers.helloworld.tls.certresolver=letsencryptresolver"
-        - "traefik.http.services.helloworld.loadbalancer.server.port=80"
 
 volumes:
   pg_data:
