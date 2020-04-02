@@ -2,15 +2,23 @@
 # Build a Docker image 
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
+trigger:
+  batch: true
+  branches:
+    include:
+    - releases/1.0
+
 pr:
 - master
 - releases/*
+
+
 
 resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  tag: '1.0.$(Rev:r)'
 
 stages:
 - stage: Build
@@ -21,12 +29,25 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - bash: |
+        echo "##vso[build.updatebuildnumber] $(tag)"
+
     - task: Docker@2
       displayName: Build an image
       inputs:
         containerRegistry: 'Docker Hub - Gabriel Meyer'
         repository: 'unisociesc/agendavoluntaria-api'
-        command: 'buildAndPush'
+        command: 'build'
         Dockerfile: '**/Dockerfile.prod'
         buildContext: '.'
         tags: '$(tag)'
+    - task: Docker@2
+      displayName: Push an image
+      condition: |
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/' )
+      inputs:
+        containerRegistry: 'Docker Hub - Gabriel Meyer'
+        repository: 'unisociesc/agendavoluntaria-api'
+        command: 'push'
+        tags: '$(tag)'
+    
