@@ -6,16 +6,21 @@ trigger:
   batch: true
   branches:
     include:
+    - release/*
     - master
 
 pr:
 - master
+- release
 
 resources:
 - repo: self
 
 variables:
-  tag: '1.0.$(Rev:r)'
+  major: 1
+  minor: $[counter(variables['major'], 0)]
+  tag: $(major).$(minor)
+
 
 stages:
 - stage: Build
@@ -48,7 +53,7 @@ stages:
 
     - task: CopyFilesOverSSH@0
       condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
       inputs:
         sshEndpoint: 'Servidor ProdCom'
         sourceFolder: '$(Build.SourcesDirectory)'
@@ -57,7 +62,7 @@ stages:
         readyTimeout: '20000'
     - task: SSH@0
       condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master'))
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
       inputs:
         sshEndpoint: 'Servidor ProdCom'
         runOptions: 'inline'
