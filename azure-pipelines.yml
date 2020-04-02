@@ -80,4 +80,4 @@ stages:
         tagSource: 'gitTag'
         tagPattern: '$(tag)'
         changeLogCompareToRelease: 'lastFullRelease'
-        changeLogType: 'commitBased''
+        changeLogType: 'commitBased'
