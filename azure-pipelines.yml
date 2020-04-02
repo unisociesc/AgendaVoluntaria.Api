@@ -6,13 +6,10 @@ trigger:
   batch: true
   branches:
     include:
-    - releases/1.0
+    - master
 
 pr:
 - master
-- releases/*
-
-
 
 resources:
 - repo: self
@@ -44,10 +41,28 @@ stages:
     - task: Docker@2
       displayName: Push an image
       condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/' )
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master' )
       inputs:
         containerRegistry: 'Docker Hub - Gabriel Meyer'
         repository: 'unisociesc/agendavoluntaria-api'
         command: 'push'
         tags: '$(tag)'
     
+
+    - task: CopyFilesOverSSH@0
+      condition: |
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master' )
+      inputs:
+        sshEndpoint: 'Servidor ProdCom'
+        sourceFolder: '$(Build.SourcesDirectory)'
+        contents: '**/docker-compose.yml'
+        targetFolder: '/var/www/api'
+        readyTimeout: '20000'
+    - task: SSH@0
+      condition: |
+        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/master' )
+      inputs:
+        sshEndpoint: 'Servidor ProdCom'
+        runOptions: 'inline'
+        inline: 'docker stack deploy -c /var/www/api/docker-compose.yml agenda-api'
+        readyTimeout: '20000'
