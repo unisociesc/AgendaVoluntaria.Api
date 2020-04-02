@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   api:
-    image: unisociesc/agendavoluntaria:latest
+    image: unisociesc/agendavoluntaria-api:#{tag}#
     build:
       context: .
       dockerfile: src/AgendaVoluntaria.Api/Dockerfile
