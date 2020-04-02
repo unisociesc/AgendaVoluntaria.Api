@@ -18,4 +18,4 @@ RUN dotnet publish "AgendaVoluntaria.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", AgendaVoluntaria.Api.dll]
+ENTRYPOINT ["dotnet", "AgendaVoluntaria.Api.dll"]
