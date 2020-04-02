@@ -50,7 +50,16 @@ stages:
         command: 'push'
         tags: '$(tag)'
     
-
+    - task: replacetokens@3
+      inputs:
+        rootDirectory: '$(Build.SourcesDirectory)'
+        targetFiles: '**/*.yml'
+        encoding: 'auto'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: true
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
     - task: CopyFilesOverSSH@0
       condition: |
         and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
