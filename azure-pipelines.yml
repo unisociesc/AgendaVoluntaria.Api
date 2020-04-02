@@ -25,8 +25,8 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'Docker Hub - Gabriel Meyer'
-        repository: 'unisociesc\agendavoluntaria-ui'
-        command: 'build'
+        repository: 'unisociesc\agendavoluntaria-api'
+        command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        buildContext: '*'
+        buildContext: '.'
         tags: '$(tag)'
