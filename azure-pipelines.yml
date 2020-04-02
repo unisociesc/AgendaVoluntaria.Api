@@ -27,6 +27,6 @@ stages:
         containerRegistry: 'Docker Hub - Gabriel Meyer'
         repository: 'unisociesc\agendavoluntaria-api'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: '**/Dockerfile.prod'
         buildContext: '.'
         tags: '$(tag)'
