@@ -67,6 +67,7 @@ stages:
         sshEndpoint: 'Servidor ProdCom'
         runOptions: 'inline'
         inline: 'docker stack deploy -c /var/www/api/docker-compose.yml agenda-api'
+        failOnStdErr: false
         readyTimeout: '20000'
     
     - task: GitHubRelease@1
