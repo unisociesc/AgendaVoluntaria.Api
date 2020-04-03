@@ -42,6 +42,7 @@ namespace AgendaVoluntaria.Api
             services.AddScoped<IVolunteerService, VolunteerService>();
             services.AddScoped<IUserShiftService, UserShiftService>();
             services.AddScoped<IPsicoService, PsicoService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IShiftRepository, ShiftRepository>();
