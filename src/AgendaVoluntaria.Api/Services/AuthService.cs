@@ -73,7 +73,7 @@ namespace AgendaVoluntaria.Api.Services
                     new Claim(ClaimTypes.Role, user.Role.ToString()),
                     new Claim("IdUser", user.Id.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddHours(42),
+                Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secret), SecurityAlgorithms.HmacSha256Signature),
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

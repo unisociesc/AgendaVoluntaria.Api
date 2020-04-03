@@ -6,6 +6,7 @@ using AgendaVoluntaria.Api.Utils;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
@@ -18,14 +19,14 @@ namespace AgendaVoluntaria.Api.Services
         {
             newUser.Password = SecurityUtils.EncryptPassword(newUser.Password);
 
-            var user = _repository.GetByAsync(x => x.Email == newUser.Email);
-            if (user == null)
+            var user = await _repository.GetByAsync(x => x.Email == newUser.Email);
+            if (user.Any())
             {
-                if (string.IsNullOrWhiteSpace(newUser.Role)) newUser.Role = "volunteers";
-                return await base.CreateAsync(newUser);
+                _notifier.Add("Já existe um usuario cadastrado com este email");
+                return -1;
             }
-            _notifier.Add("Já existe um usuario cadastrado com este email");
-            return -1;
+            if (string.IsNullOrWhiteSpace(newUser.Role)) newUser.Role = "volunteers";
+            return await base.CreateAsync(newUser);
         }
 
         public override Task<int> UpdateAsync(User entity)
