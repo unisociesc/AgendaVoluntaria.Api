@@ -71,6 +71,7 @@ namespace AgendaVoluntaria.Api.Services
                 {
                     new Claim(ClaimTypes.Email, user.Email.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.ToString()),
+                    new Claim(ClaimTypes.Name, user.Name.ToString()),
                     new Claim("IdUser", user.Id.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
