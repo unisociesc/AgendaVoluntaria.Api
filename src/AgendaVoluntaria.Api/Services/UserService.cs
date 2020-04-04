@@ -29,10 +29,16 @@ namespace AgendaVoluntaria.Api.Services
             return await base.CreateAsync(newUser);
         }
 
-        public override Task<int> UpdateAsync(User entity)
+        public override async Task<int> UpdateAsync(User entity)
         {
-            entity.Password = SecurityUtils.EncryptPassword(entity.Password);
-            return base.UpdateAsync(entity);
+            var user = await _repository.GetByIdAsync(entity.Id);
+
+            if (string.IsNullOrWhiteSpace(entity.Password) || SecurityUtils.EncryptPassword(entity.Password) == user.Password)
+                entity.Password = user.Password;
+            else
+                entity.Password = SecurityUtils.EncryptPassword(entity.Password);
+
+            return await base.UpdateAsync(entity);
         }
     }
 }
