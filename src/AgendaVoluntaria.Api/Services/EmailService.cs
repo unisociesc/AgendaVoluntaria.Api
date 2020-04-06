@@ -19,7 +19,7 @@ namespace AgendaVoluntaria.Api.Services
         private readonly int _port = 587;
         private readonly string _from = "agendatriagem@prodcom.com.br";
         private readonly string _name = "Agenda triagem";
-        private readonly string _password = "XXX";
+        private readonly string _password = "UniSociesc@123";
 
         public EmailService(INotifier notifier)
         {
