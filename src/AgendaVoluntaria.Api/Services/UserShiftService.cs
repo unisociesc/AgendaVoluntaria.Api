@@ -66,7 +66,7 @@ namespace AgendaVoluntaria.Api.Services
             return await base.CreateAsync(volunteerShift);
         }
 
-        public async Task SendScheduleOfDay()
+        public async Task SendNextDayScheduleForCoordinators()
         {
 
             var schedules = await _repository.GetSchedulesOfDay(DateTime.Today.AddDays(1));

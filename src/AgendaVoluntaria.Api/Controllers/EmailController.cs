@@ -24,11 +24,12 @@ namespace AgendaVoluntaria.Api.Controllers
             _userShiftService = userShiftService;
         }
 
-        [HttpGet]
+        [HttpGet("SendNextDayScheduleForCoordinators")]
         [AllowAnonymous]
-        public async virtual Task<IActionResult> SendAsync()
+        
+        public async Task<IActionResult> SendAsync()
         {
-            await _userShiftService.SendScheduleOfDay();
+            await _userShiftService.SendNextDayScheduleForCoordinators();
             return CustomResponse("Email enviado!");
         }
 

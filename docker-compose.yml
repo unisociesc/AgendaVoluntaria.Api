@@ -1,6 +1,28 @@
 version: '3.7'
 
 services:
+  scheduler:
+    image: unisociesc/agendavoluntaria-scheduler:#{tag}#
+    build:
+      context: .
+      dockerfile: src/AgendaVoluntaria.Scheduler/Dockerfile
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      update_config:
+        delay: 15s
+        parallelism: 1
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
   api:
     image: unisociesc/agendavoluntaria-api:#{tag}#
     build:

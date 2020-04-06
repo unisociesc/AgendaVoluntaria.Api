@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendaVoluntaria.Tests", "t
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B63C4774-C469-4AA4-9197-97B21E1E2E48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaVoluntaria.Scheduler", "src\AgendaVoluntaria.Scheduler\AgendaVoluntaria.Scheduler.csproj", "{796925BC-54F9-4502-80AA-328C38717B24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B63C4774-C469-4AA4-9197-97B21E1E2E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B63C4774-C469-4AA4-9197-97B21E1E2E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B63C4774-C469-4AA4-9197-97B21E1E2E48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{796925BC-54F9-4502-80AA-328C38717B24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{796925BC-54F9-4502-80AA-328C38717B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{796925BC-54F9-4502-80AA-328C38717B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{796925BC-54F9-4502-80AA-328C38717B24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

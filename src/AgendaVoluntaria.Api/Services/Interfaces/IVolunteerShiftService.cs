@@ -8,6 +8,6 @@ namespace AgendaVoluntaria.Api.Services.Interfaces
     public interface IUserShiftService : ICoreCrudService<UserShift>
     {
         public Task<List<UserShift>> GetUserShiftsByUser(Guid idUser);
-        public Task SendScheduleOfDay();
+        public Task SendNextDayScheduleForCoordinators();
     }
 }
