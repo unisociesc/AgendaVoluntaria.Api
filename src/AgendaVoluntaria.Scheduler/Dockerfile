@@ -1,7 +1,7 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1-alpine AS base
-RUN apk add curl
+RUN apk add tzdata curl && cp /usr/share/zoneinfo/America/Bahia /etc/localtime && echo "America/Bahia" >  /etc/timezone
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
