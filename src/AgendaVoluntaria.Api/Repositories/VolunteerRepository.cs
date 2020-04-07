@@ -22,5 +22,11 @@ namespace AgendaVoluntaria.Api.Repositories
                 .Select(x => x.Shift)
                 .ToListAsync();
         }
+
+        public async Task<Volunteer> GetVolunteerByUserId(Guid userId)
+        {
+            return await _context.Volunteers.Where(x => x.IdUser == userId)
+                .FirstOrDefaultAsync();
+        }
     }
 }
