@@ -24,7 +24,10 @@ namespace AgendaVoluntaria.Api.Services
 
             var userShifts = await userShiftService.GetUserShiftsByUser(attendance.IdUser);
 
-            var shift = userShifts.Where(x => x.Shift.Begin.Day == DateTime.Now.Day).FirstOrDefault().Shift;
+            var shift = userShifts
+                .Where(x => x.Shift.Begin.Year == DateTime.Now.Year)
+                .Where(x => x.Shift.Begin.DayOfYear == DateTime.Now.DayOfYear)
+                .FirstOrDefault()?.Shift;
 
             if (shift == null)
             {
