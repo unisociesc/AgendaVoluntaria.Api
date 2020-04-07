@@ -26,7 +26,7 @@ namespace AgendaVoluntaria.Api.Services
             _notifier = notifier;
         }
 
-        public Task SendAsync(string to, string subject, string message)
+        public async Task SendAsync(string to, string subject, string message)
         {
             try
             {
@@ -41,15 +41,15 @@ namespace AgendaVoluntaria.Api.Services
                 client.Port = _port;
                 client.Credentials = new NetworkCredential(_from, _password);
                 client.EnableSsl = true;
-                
-                return client.SendMailAsync(mail);
+                await client.SendMailAsync(mail);
+                return;
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 _notifier.Add("Erro ao enviar o e-mail");
+                Console.WriteLine(e.Message.ToString());
+                return;
             }
-
-            return null;
         }
     }
 }

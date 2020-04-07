@@ -17,7 +17,8 @@ namespace AgendaVoluntaria.Scheduler
         public Worker(ILogger<Worker> logger)
         {
             _logger = logger;
-            restClient = new RestClient("https://agendavoluntaria.herokuapp.com/api");
+            restClient = new RestClient("https://api");
+            restClient.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -26,12 +27,12 @@ namespace AgendaVoluntaria.Scheduler
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
-                if (true)
+                if (DateTime.Now.ToString("HH:mm") == "12:00")
                 {
-                    var request = new RestRequest("/Email/SendNextDayScheduleForCoordinators");
+                    var request = new RestRequest("/api/Email/SendNextDayScheduleForCoordinators");
                     var response = restClient.Get(request);
                 }
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(60000, stoppingToken);
             }
         }
     }

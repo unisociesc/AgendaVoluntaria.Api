@@ -68,8 +68,9 @@ namespace AgendaVoluntaria.Api.Services
 
         public async Task SendNextDayScheduleForCoordinators()
         {
+            DateTime dateTime = DateTime.Today.AddDays(1);
 
-            var schedules = await _repository.GetSchedulesOfDay(DateTime.Today.AddDays(1));
+            var schedules = await _repository.GetSchedulesOfDay(dateTime);
             var shifts = schedules.GroupBy(x => new { x.Begin, x.End }).OrderBy(x => x.Key.Begin).ToList();
 
             string rowColor = string.Empty;
@@ -101,10 +102,15 @@ namespace AgendaVoluntaria.Api.Services
                 html = reader.ReadToEnd();
             }
 
-            html = html.Replace("#DAY#", DateTime.Today.AddDays(1).Day.ToString());
-            html = html.Replace("#MONTH#", DateTime.Today.AddDays(1).Month.ToString());
+            html = html.Replace("#DAY/MONTH#", dateTime.ToString("dd/MM"));
             html = html.Replace("#TABLE-BODY#", htmlTable);
-            emailService.SendAsync("ghmeyer0@gmail.com", "Triagem COVID-19 - Escala", html);
+            var users = await _userService.GetByAsync(x => x.Role == "coordinator" || x.Role == "admin");
+
+            foreach (var user in users)
+            {
+                await emailService.SendAsync(user.Email.Trim(), $"Triagem COVID-19 - Escala {dateTime:dd/MM}", html);
+            }
+
             
             return;
             
