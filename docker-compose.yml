@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: src/AgendaVoluntaria.Scheduler/Dockerfile
+    depends_on:
+      - api
     networks:
       - backend
     deploy:
