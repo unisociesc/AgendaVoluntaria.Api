@@ -38,17 +38,14 @@ namespace AgendaVoluntaria.Api.Controllers
             return CustomResponse("Check-In registrado!");
         }
 
-
         [HttpPost]
         [Route("out")]
         public async Task<IActionResult> Out(CheckRequest request)
         {
             Attendance attendance = this.mapper.Map<Attendance>(request);
             attendance.IdUser = Guid.Parse(GetClaim("IdUser"));
-            await _attendanceService.UpdateAsync(attendance);
+            await _attendanceService.SaveCheckOut(attendance);
             return CustomResponse("Check-Out registrado!");
         }
-
-
     }
 }
