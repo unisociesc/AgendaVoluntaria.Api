@@ -19,6 +19,8 @@ namespace AgendaVoluntaria.Api.Services
         private readonly IUserService _userService;
         private readonly IEmailService emailService;
 
+        private readonly IUserShiftRepository _repository;
+
         public UserShiftService(INotifier notifier,
                                 IShiftService shiftService,
                                 IVolunteerService volunteerService,
@@ -30,6 +32,7 @@ namespace AgendaVoluntaria.Api.Services
             _shiftService = shiftService;
             _volunteerService = volunteerService;
             _userService = userService;
+            _repository = repository;
             this.emailService = emailService;
         }
 
@@ -64,6 +67,33 @@ namespace AgendaVoluntaria.Api.Services
             }
 
             return await base.CreateAsync(volunteerShift);
+        }
+
+        public override async Task<int> DeleteAsync(Guid id)
+        {
+            UserShift userShift = await _repository.GetByIdAsync(id);
+            
+            if (userShift == null)
+            {
+                _notifier.Add("Voluntário não faz parte deste turno");
+                return -1;
+            }
+            
+            Shift shift = await _shiftService.GetByIdAsync(userShift.IdShift);
+
+            if (shift == null)
+            {
+                _notifier.Add("Turno não encontrado");
+                return -1;
+            }
+
+            if(DateTime.Now > shift.Begin.AddHours(-24))
+            {
+                _notifier.Add("O turno somente pode ser excluído com 24h de antecedência");
+                return -1;
+            }
+
+            return await _repository.DeleteAsync(id);
         }
 
         public async Task SendNextDayScheduleForCoordinators()

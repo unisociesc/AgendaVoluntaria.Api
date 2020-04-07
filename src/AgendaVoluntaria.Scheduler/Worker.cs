@@ -25,12 +25,18 @@ namespace AgendaVoluntaria.Scheduler
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                var horario = DateTime.Now;
+                _logger.LogInformation("Worker start at: {time}", horario);
 
-                if (DateTime.Now.ToString("HH:mm") == "12:00")
+                if (horario.ToShortTimeString() == "12:00")
                 {
                     var request = new RestRequest("/api/Email/SendNextDayScheduleForCoordinators");
-                    var response = restClient.Get(request);
+                    var response = await restClient.ExecuteGetAsync(request);
+
+                    if (response.IsSuccessful)
+                        _logger.LogInformation("Enviado Emails de escala: {time}", horario);
+                    else
+                        _logger.LogError("Erro ao enviar emails: {time} | {error}", horario, response.ErrorMessage);
                 }
                 await Task.Delay(60000, stoppingToken);
             }
