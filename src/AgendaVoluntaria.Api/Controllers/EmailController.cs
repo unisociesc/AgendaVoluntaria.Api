@@ -5,6 +5,7 @@ using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using AgendaVoluntaria.Api.Views;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendaVoluntaria.Api.Controllers
@@ -15,18 +16,20 @@ namespace AgendaVoluntaria.Api.Controllers
     public class EmailController : CoreController
     {
         private readonly INotifier _notifier;
-        private readonly IEmailService _emailService;
+        private readonly IUserShiftService _userShiftService;
         
-        public EmailController(INotifier notifier, IEmailService emailService) : base(notifier)
+        public EmailController(INotifier notifier, IUserShiftService userShiftService) : base(notifier)
         {
             _notifier = notifier;
-            _emailService = emailService;
+            _userShiftService = userShiftService;
         }
 
-        [HttpGet]
-        public virtual IActionResult SendAsync()
+        [HttpGet("SendNextDayScheduleForCoordinators")]
+        [AllowAnonymous]
+        
+        public async Task<IActionResult> SendAsync()
         {
-            _emailService.SendAsync("allanrodrigol@gmail.com","Teste","Olá mundo!");
+            await _userShiftService.SendNextDayScheduleForCoordinators();
             return CustomResponse("Email enviado!");
         }
 

@@ -19,14 +19,14 @@ namespace AgendaVoluntaria.Api.Services
         private readonly int _port = 587;
         private readonly string _from = "agendatriagem@prodcom.com.br";
         private readonly string _name = "Agenda triagem";
-        private readonly string _password = "XXX";
+        private readonly string _password = "UniSociesc@123";
 
         public EmailService(INotifier notifier)
         {
             _notifier = notifier;
         }
 
-        public Task SendAsync(string to, string subject, string message)
+        public async Task SendAsync(string to, string subject, string message)
         {
             try
             {
@@ -41,15 +41,15 @@ namespace AgendaVoluntaria.Api.Services
                 client.Port = _port;
                 client.Credentials = new NetworkCredential(_from, _password);
                 client.EnableSsl = true;
-                
-                return client.SendMailAsync(mail);
+                await client.SendMailAsync(mail);
+                return;
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 _notifier.Add("Erro ao enviar o e-mail");
+                Console.WriteLine(e.Message.ToString());
+                return;
             }
-
-            return null;
         }
     }
 }

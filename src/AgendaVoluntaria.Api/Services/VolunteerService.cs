@@ -10,7 +10,16 @@ namespace AgendaVoluntaria.Api.Services
 {
     public class VolunteerService : CoreCrudService<Volunteer, IVolunteerRepository>, IVolunteerService
     {
-        public VolunteerService(INotifier notifier, IVolunteerRepository repository) : base(notifier, repository) { }
+        private readonly IVolunteerRepository _repository;
 
+        public VolunteerService(INotifier notifier, IVolunteerRepository repository) : base(notifier, repository)
+        {
+            _repository = repository;
+        }
+
+        public Task<Volunteer> GetVolunteerByUserIdAsync(Guid userId)
+        {
+            return _repository.GetVolunteerByUserId(userId);
+        }
     }
 }

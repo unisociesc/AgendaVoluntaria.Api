@@ -2,7 +2,7 @@ using AgendaVoluntaria.Api.Models;
 using AgendaVoluntaria.Api.Repositories.Core;
 using AgendaVoluntaria.Api.Repositories.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using AgendaVoluntaria.Api.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -32,6 +32,24 @@ namespace AgendaVoluntaria.Api.Repositories
         public int GetVolunteersCount(Guid idShift)
         {
             return _context.UserShifts.Where(x => x.IdShift == idShift).Count();
+        }
+
+        public async Task<List<ScheduleViewModel>> GetSchedulesOfDay(DateTime date)
+        {
+            return await _context.UserShifts
+                .Include(x => x.Shift)
+                .Include(x => x.User)
+                    .ThenInclude(x => x.Volunteer)
+                .Where(x => x.Shift.Begin >= date && x.Shift.Begin < date.AddDays(1))
+                .Select(x => new ScheduleViewModel
+                {
+                    Begin = x.Shift.Begin,
+                    End = x.Shift.End,
+                    User = x.User
+                })
+                .OrderBy(x => x.Begin)
+                .ToListAsync();
+
         }
 
     }

@@ -1,4 +1,5 @@
 using AgendaVoluntaria.Api.Models;
+using AgendaVoluntaria.Api.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace AgendaVoluntaria.Api.Repositories.Interfaces
 
         public Task<List<UserShift>> GetUserShiftsByUser(Guid idUser);
 
-        Task<IList<Shift>> GetShiftsByUserId(Guid guid);
+        public Task<IList<Shift>> GetShiftsByUserId(Guid guid);
+
+        public Task<List<ScheduleViewModel>> GetSchedulesOfDay(DateTime date);
     }
 }
