@@ -56,9 +56,15 @@ namespace AgendaVoluntaria.Api.Services
             var attendances = await _repository.GetByAsync(x => x.IdUser == attendance.IdUser && x.End == null) ;
 
             var a = attendances.FirstOrDefault();
-            a.End = DateTime.Now;
-
-            return await base.UpdateAsync(a);
+            
+            if (a != null)
+            {
+                a.End = DateTime.Now;
+                return await base.UpdateAsync(a);
+            }
+            
+             _notifier.Add("Não há turnos com check-out pendente para o voluntário");
+             return -1;
         }
     }
 }
