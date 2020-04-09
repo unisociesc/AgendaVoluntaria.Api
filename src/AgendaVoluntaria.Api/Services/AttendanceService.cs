@@ -38,11 +38,11 @@ namespace AgendaVoluntaria.Api.Services
 
             attendance.IdShift = shift.Id;
 
-            if (DateTime.Now < shift.Begin.AddHours(-1) || DateTime.Now > shift.Begin.AddHours(1))
-            {
-                _notifier.Add("Não é possivel fazer o check-in com mais de 1 hora de diferença");
-                return -1;
-            }
+            //if (DateTime.Now < shift.Begin.AddHours(-1) || DateTime.Now > shift.Begin.AddHours(1))
+            //{
+            //    _notifier.Add("Não é possivel fazer o check-in com mais de 1 hora de diferença");
+            //    return -1;
+            //}
 
             // TODO: Configura Geolocalização
             //if ((attendance.Latitude >= 26.284406 && attendance.Latitude <= -26.290933) || (attendance.Longitude >= -48.809409 && attendance.Longitude <= -48.817181))
