@@ -43,9 +43,14 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:AgendaVoluntaria.Api.Controllers.CheckController.In(AgendaVoluntaria.Api.Views.CheckRequest)" -->
-        <member name="M:AgendaVoluntaria.Api.Controllers.ShiftsController.GetAllByNextDays(System.Int32)">
+        <member name="M:AgendaVoluntaria.Api.Controllers.ShiftsController.GetAllShiftsByNextDays(System.Int32)">
             <summary> 
             Obtem os turnos dos proximos X dias
+            </summary>
+        </member>
+        <member name="M:AgendaVoluntaria.Api.Controllers.ShiftsController.GetAllShiftUsersByNextDays(System.Int32)">
+            <summary> 
+            Obtem os turnos e voluntários dos proximos X dias
             </summary>
         </member>
         <member name="P:AgendaVoluntaria.Api.Views.Core.BaseResponse.Id">
