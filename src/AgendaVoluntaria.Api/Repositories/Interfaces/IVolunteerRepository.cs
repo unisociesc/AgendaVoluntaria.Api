@@ -10,5 +10,7 @@ namespace AgendaVoluntaria.Api.Repositories.Interfaces
         Task<IList<Shift>> GetShiftsByVolunteerId(Guid volunteerId);
 
         public Task<Volunteer> GetVolunteerByUserId(Guid userId);
+
+        public Task<IList<Volunteer>> GetAllVolunteersNeedPsycholistAsync();
     }
 }

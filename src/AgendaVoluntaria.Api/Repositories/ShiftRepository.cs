@@ -18,23 +18,23 @@ namespace AgendaVoluntaria.Api.Repositories
 
         public async Task<IList<ShiftViewModel>> GetAllByNextDays(int days)
         {
-            //.Where(x => x.Begin >= dateTime && x.Begin < dateTime.AddDays(days))
-            
             DateTime dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            
             var list = await  _context.Shifts
                 .Include(x => x.UserShifts)
                     .ThenInclude(x => x.User)
+                .Where(x => x.Begin >= dateTime && x.Begin < dateTime.AddDays(days))
                 .Select(x => new ShiftViewModel
-                {
-                    Id = x.Id,
-                    Begin = x.Begin,
-                    End = x.End,
-                    MaxVolunteer = x.MaxVolunteer,
-                    TotalVolunteers = x.UserShifts.Count(),
-                    CreateAt = x.CreateAt,
-                    UpdateAt = x.UpdateAt,
-                    Users = x.UserShifts.Select(x => x.User).ToList()
-                })
+                    {
+                        Id = x.Id,
+                        Begin = x.Begin,
+                        End = x.End,
+                        MaxVolunteer = x.MaxVolunteer,
+                        TotalVolunteers = x.UserShifts.Count(),
+                        CreateAt = x.CreateAt,
+                        UpdateAt = x.UpdateAt,
+                        Users = x.UserShifts.Select(x => x.User).ToList()
+                    })
                 .OrderBy(x => x.Begin)
                 .ToListAsync();
 
@@ -46,7 +46,7 @@ namespace AgendaVoluntaria.Api.Repositories
         {
             var shifts = await _context.Shifts
                 .Include(x => x.UserShifts)
-                .ThenInclude(x => x.User)
+                    .ThenInclude(x => x.User)
                 .Select(x => new ShiftViewModel
                 {
                     Id = x.Id,

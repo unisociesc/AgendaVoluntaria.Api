@@ -28,5 +28,13 @@ namespace AgendaVoluntaria.Api.Repositories
             return await _context.Volunteers.Where(x => x.IdUser == userId)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<IList<Volunteer>> GetAllVolunteersNeedPsycholistAsync()
+        {
+            return await _context.Volunteers
+                .Include(x => x.User)
+                .Where(x => x.NeedPsico == true)
+                .ToListAsync();
+        }
     }
 }
