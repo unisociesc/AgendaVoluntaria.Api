@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AgendaVoluntaria.Api.Controllers.Core;
 using AgendaVoluntaria.Api.Models;
@@ -18,6 +19,35 @@ namespace AgendaVoluntaria.Api.Controllers
         {
             _service = service;
             _notifier = notifier;
+        }
+
+        //TODO: adicionar role para psicologo
+        [HttpGet("needPsychologist")]
+        public async Task<ActionResult<List<VolunteerResponse>>> GetAllNeedPsychologistAsync()
+        {
+            var volunteers = await _service.GetAllVolunteersNeedPsycholistAsync();
+
+            var volunteersFormated = new List<object>();
+
+            foreach (var item in volunteers)
+            {
+                volunteersFormated.Add(new
+                {
+                    item.Id,
+                    item.Ra,
+                    item.Course,
+                    item.IdUser,
+                    item.NeedPsico,
+                    user = new {
+                        name = item.User.Name,
+                        cpf = item.User.CPF,
+                        phone = item.User.Phone,
+                        email = item.User.Email
+                    }
+                });
+            }
+            
+            return CustomResponse("Registros Encontrados", volunteersFormated);
         }
 
         [HttpPost("needPsychologist")]

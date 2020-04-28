@@ -4,6 +4,7 @@ using AgendaVoluntaria.Api.Services.Core;
 using AgendaVoluntaria.Api.Services.Interfaces;
 using AgendaVoluntaria.Api.Utils.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AgendaVoluntaria.Api.Services
@@ -20,6 +21,11 @@ namespace AgendaVoluntaria.Api.Services
         public Task<Volunteer> GetVolunteerByUserIdAsync(Guid userId)
         {
             return _repository.GetVolunteerByUserId(userId);
+        }
+
+        public Task<IList<Volunteer>> GetAllVolunteersNeedPsycholistAsync()
+        {
+            return _repository.GetAllVolunteersNeedPsycholistAsync();
         }
     }
 }

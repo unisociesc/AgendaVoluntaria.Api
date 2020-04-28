@@ -8,5 +8,6 @@ namespace AgendaVoluntaria.Api.Services.Interfaces
     public interface IVolunteerService : ICoreCrudService<Volunteer>
     {
         Task<Volunteer> GetVolunteerByUserIdAsync(Guid userId);
+        Task<IList<Volunteer>> GetAllVolunteersNeedPsycholistAsync();
     }
 }

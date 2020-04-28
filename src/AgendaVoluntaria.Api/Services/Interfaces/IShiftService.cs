@@ -8,8 +8,8 @@ namespace AgendaVoluntaria.Api.Services.Interfaces
 {
     public interface IShiftService : ICoreCrudService<Shift>
     {
-        Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync();
+        Task<IList<ShiftViewModel>> GetAllWithTotalVolunteersAsync();
 
-        Task<IList<ShiftViewlModel>> GetAllByNextDays(int days);
+        Task<IList<ShiftViewModel>> GetAllByNextDays(int days);
     }
 }

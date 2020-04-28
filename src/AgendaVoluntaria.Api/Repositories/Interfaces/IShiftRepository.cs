@@ -7,8 +7,8 @@ namespace AgendaVoluntaria.Api.Repositories.Interfaces
 {
     public interface IShiftRepository : ICoreRepository<Shift>
     {
-        Task<IList<ShiftViewlModel>> GetAllWithTotalVolunteersAsync();
+        Task<IList<ShiftViewModel>> GetAllWithTotalVolunteersAsync();
 
-        Task<IList<ShiftViewlModel>> GetAllByNextDays(int days);
+        Task<IList<ShiftViewModel>> GetAllByNextDays(int days);
     }
 }
