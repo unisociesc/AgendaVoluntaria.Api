@@ -48,16 +48,6 @@ namespace AgendaVoluntaria.Api.Services
             if (shift == null)
                 return -1;
 
-
-            var volunteerShifts = await _repository.GetShiftsByUserId(volunteerShift.IdUser);
-            var volunteerShiftsQuerable = volunteerShifts
-                .Where(x => x.Begin.AddHours(24) > shift.Begin && x.Begin.AddHours(-24) < shift.Begin);
-            if (volunteerShiftsQuerable.Any())
-            {
-                _notifier.Add("Existe outro turno já atribuido ao voluntario, com intervalo menor de 24 horas");
-                return -1;
-            }
-
             int volunteers = _repository.GetVolunteersCount(shift.Id);
 
             if (volunteers >= shift.MaxVolunteer)
