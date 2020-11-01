@@ -41,16 +41,6 @@ stages:
         buildContext: '.'
         tags: '$(tag)'
     - task: Docker@2
-      displayName: Build an image of Scheduller
-      inputs:
-        containerRegistry: 'Docker Hub - Gabriel Meyer'
-        repository: 'unisociesc/agendavoluntaria-scheduler'
-        command: 'build'
-        Dockerfile: '**/AgendaVoluntaria.Scheduler/Dockerfile'
-        buildContext: '.'
-        tags: '$(tag)'
-    
-    - task: Docker@2
       displayName: Push an image of API
       condition: |
         and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
@@ -59,17 +49,6 @@ stages:
         repository: 'unisociesc/agendavoluntaria-api'
         command: 'push'
         tags: '$(tag)'
-    
-    - task: Docker@2
-      displayName: Push an image of Scheduller
-      condition: |
-        and ( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
-      inputs:
-        containerRegistry: 'Docker Hub - Gabriel Meyer'
-        repository: 'unisociesc/agendavoluntaria-scheduler'
-        command: 'push'
-        tags: '$(tag)'
-    
     - task: replacetokens@3
       inputs:
         rootDirectory: '$(Build.SourcesDirectory)'
